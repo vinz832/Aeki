@@ -38,29 +38,26 @@ public class Bestellung {
     private final int anzahlPremiumTueren;
 
     /**
-     * Erstellt eine Bestellung-Instanz NUR zum Anzeigen von Bestellungen.
-     * Diese Instanz erstellt KEINE neue Bestellung!
-     * @param fabrik die Fabrik, deren Bestellungen angezeigt werden sollen
-     * @return eine Anzeige-Instanz
+     * Konstruktor für Anzeige-Zwecke: Erstellt KEINE neue Bestellung.
+     * Verwende setztFabrik() um die Fabrik zu setzen, dann alleBestellungenAnzeigen().
      */
-    public static Bestellung erstelleAnzeigeInstanz(Fabrik fabrik) {
-        return new Bestellung(fabrik);
-    }
-
-    /**
-     * Privater Konstruktor für Anzeige-Zwecke: Erstellt KEINE neue Bestellung.
-     * Dieser Konstruktor dient nur zum Anzeigen von Bestellungen aus der Fabrik.
-     * @param fabrik die Fabrik, deren Bestellungen angezeigt werden sollen
-     */
-    private Bestellung(Fabrik fabrik) {
-        if (fabrik == null) {
-            throw new IllegalArgumentException("Fabrik darf nicht null sein.");
-        }
-        this.fabrikReferenz = fabrik;
+    public Bestellung() {
         // Keine echte Bestellung - nur für Anzeige
         this.bestellungsNr = 0;
         this.anzahlStandardTueren = 0;
         this.anzahlPremiumTueren = 0;
+        this.fabrikReferenz = null;
+    }
+
+    /**
+     * Setzt die Fabrik für diese Anzeige-Instanz.
+     * @param fabrik die Fabrik, deren Bestellungen angezeigt werden sollen
+     */
+    public void setztFabrik(Fabrik fabrik) {
+        if (fabrik == null) {
+            throw new IllegalArgumentException("Fabrik darf nicht null sein.");
+        }
+        this.fabrikReferenz = fabrik;
     }
 
     /**

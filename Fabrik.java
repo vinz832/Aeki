@@ -37,7 +37,8 @@ public class Fabrik {
         
         // Bestellung-Instanz NUR zum Anzeigen erstellen (keine echte Bestellung!)
         System.out.println("\n--- Bestellungen über Bestellung-Anzeige anzeigen ---");
-        Bestellung anzeige = Bestellung.erstelleAnzeigeInstanz(fabrik);
+        Bestellung anzeige = new Bestellung();
+        anzeige.setztFabrik(fabrik);
         anzeige.alleBestellungenAnzeigen();
     }
 
