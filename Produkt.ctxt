@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Produkt
+comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Produkt.\r\n\ K\u00F6nnen\ entweder\ Standartt\u00FCren\ oder\ Premiumt\u00FCren\ sein.\ \r\n\ Abstrakte\ Basisklasse\ fuer\ Produkte.\r\n\r\n\ @author\ (Ihr\ Name)\ Owen,\ Mathieu,\ Alexander,\ Moacir,\ Vinzenz\r\n\ @version\ (eine\ Versionsnummer\ oder\ ein\ Datum)\r\n
+comment1.params=neuerZustand
+comment1.target=void\ zustandAendern(int)
+comment1.text=\r\n\ Aendert\ den\ Zustand\ des\ Produkts.\r\n\ @param\ neuerZustand\ neuer\ Zustand\ (siehe\ Konstanten\ in\ Dokumentation)\r\n\ @throws\ IllegalArgumentException\ bei\ ung\u00FCltigem\ Zustand\ (negativ)\r\n
+comment2.params=
+comment2.target=int\ aktuellerZustand()
+comment2.text=\r\n\ Liefert\ den\ aktuellen\ Zustand.\r\n\ @return\ aktueller\ Zustand\r\n
+numComments=3

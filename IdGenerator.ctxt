@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=IdGenerator
+comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ ID\ Generator,\r\n\ ID-Generator\ f\u00FCr\ Bestellnummern.\r\n\r\n\ @author\ (Ihr\ Name)\ Owen,\ Mathieu,\ Alexander,\ Moacir,\ Vinzenz\r\n\ @version\ (eine\ Versionsnummer\ oder\ ein\ Datum)\r\n
+comment1.params=
+comment1.target=IdGenerator()
+comment2.params=
+comment2.target=int\ nextOrderId()
+numComments=3

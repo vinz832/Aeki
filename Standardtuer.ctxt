@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Standardtuer
+comment0.text=\r\n\ Standardtuer\ Produkt.\r\n\ \r\n\ \r\n\ Jedes\ Produkt\ befindet\ sich\ in\ einem\ gewissen\ Zustand\ wie\ z.B.\ \r\n\ \ \ \ \ \ \ \ \u25CB\ Bestellt\r\n\ \ \ \ \ \ \ \ \u25CB\ In\ Produktion\ \r\n\ \ \ \ \ \ \ \ \u25CB\ Fertiggestellt\ \r\n\ \ \ \ \ \ \ \ \u25CB\ Transportvorbereitung\r\n\ \ \ \ \ \ \ \ \u25CB\ Versand\ \r\n\ \ \ \ \u2022\ Dieser\ wird\ in\ einer\ Instanzvariable\ abgespeichert.\r\n\ \ \ \ \u2022\ sind\ Information\ vorhanden,\ die\ f\u00FCr\ alle\ Instanzen\ dieser\ Klassen\ gleich\ sind.\ Beispielsweise\ w\u00E4ren\ das\r\n\ \ \ \ \ \ \ \ \u25CB\ \ die\ Anzahl\ Holzeinheiten,\r\n\ \ \ \ \ \ \ \ \u25CB\ \ Anzahl\ Schrauben,\ \r\n\ \ \ \ \ \ \ \ \u25CB\ Anzahl\ T\u00FCrgriffe\ \r\n\ \ \ \ \ \ \ \ \u25CB\ Verwendeter\ Lack\ \r\nAuch\ die\ Methoden,\ um\ auf\ diese\ Information\ zuzugreifen,\ geh\u00F6ren\ der\ Klasse\ an\ und\ nicht\ den\ einzelnen\ Instanzen.\r\n\ @author\ (Ihr\ Name)\ Moacir,\ Owen,\ Alexander,\ Mathieu,\ Vinzenz\r\n\ @version\ (eine\ Versionsnummer\ oder\ ein\ Datum)\r\n\r\n\r\n
+comment1.params=
+comment1.target=Standardtuer()
+comment1.text=\r\n\ Erzeugt\ eine\ Standardtuer\ (initial\ Zustand\ BESTELLT\=0).\r\n
+numComments=2

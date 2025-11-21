@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Fabrik
+comment0.text=\r\n\ Fabrik\ nimmt\ Bestellungen\ entgegen\ und\ gibt\ sie\ auf\ der\ Konsole\ aus.\r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment1.text=\r\n\ Demo-Programm\:\ legt\ 2-3\ Bestellungen\ an\ und\ gibt\ sie\ aus.\r\n\ @param\ args\ keine\ speziellen\ Argumente\ erforderlich\r\n
+comment2.params=standardTueren\ premiumTueren
+comment2.target=void\ bestellungAufgeben(int,\ int)
+comment2.text=\r\n\ Aufgabe\ einer\ Bestellung.\r\n\ @param\ standardTueren\ Anzahl\ Standardt\u00FCren\ (>\=0)\r\n\ @param\ premiumTueren\ Anzahl\ Premiumt\u00FCren\ (>\=0)\r\n
+comment3.params=
+comment3.target=void\ bestellungenAusgeben()
+comment3.text=\r\n\ Gibt\ alle\ Bestellungen\ kompakt\ auf\ der\ Konsole\ aus.\r\n
+comment4.params=
+comment4.target=int\ anzahlBestellungen()
+numComments=5
