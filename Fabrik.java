@@ -29,9 +29,16 @@ public class Fabrik {
      */
     public static void main(String[] args) {
         Fabrik fabrik = new Fabrik();
+        
+        // Fabrik-Referenz in Bestellung setzen
+        Bestellung.setzeFabrik(fabrik);
+        
         fabrik.bestellungAufgeben(2, 1);
         fabrik.bestellungAufgeben(0, 2);
         fabrik.bestellungenAusgeben();
+        
+        System.out.println("\n--- Bestellungen über Bestellung-Klasse anzeigen ---");
+        Bestellung.alleBestellungenAnzeigen();
     }
 
     /**
@@ -65,5 +72,13 @@ public class Fabrik {
     // Hilfsmethode für Tests: Anzahl Bestellungen
     public int anzahlBestellungen() {
         return bestellungen.size();
+    }
+
+    /**
+     * Gibt die Liste aller Bestellungen zurück.
+     * @return unveränderbare Liste aller Bestellungen
+     */
+    public List<Bestellung> gibAlleBestellungen() {
+        return new ArrayList<>(bestellungen);
     }
 }

@@ -19,8 +19,12 @@ import java.util.List;
 
 /**
  * Repräsentiert eine Kundenbestellung.
+ * Zeigt auch alle Bestellungen aus der Fabrik an.
  */
 public class Bestellung {
+    // Referenz zur Fabrik, um alle Bestellungen anzuzeigen
+    private static Fabrik fabrikReferenz;
+
     private final List<Produkt> bestellteProdukte = new ArrayList<>();
 
     private boolean bestellBestaetigung;
@@ -97,5 +101,36 @@ public class Bestellung {
     public String toString() {
         return String.format("#%d: %dx Standard, %dx Premium (Produkte: %d)",
                 bestellungsNr, anzahlStandardTueren, anzahlPremiumTueren, bestellteProdukte.size());
+    }
+
+    /**
+     * Setzt die Fabrik-Referenz, um auf alle Bestellungen zugreifen zu können.
+     * @param fabrik die Fabrik-Instanz
+     */
+    public static void setzeFabrik(Fabrik fabrik) {
+        fabrikReferenz = fabrik;
+    }
+
+    /**
+     * Zeigt alle Bestellungen aus der Fabrik an.
+     * Es werden KEINE neuen Bestellungen aufgegeben, sondern nur die vorhandenen angezeigt.
+     */
+    public static void alleBestellungenAnzeigen() {
+        if (fabrikReferenz == null) {
+            System.out.println("Keine Fabrik gesetzt. Bitte zuerst Bestellung.setzeFabrik() aufrufen.");
+            return;
+        }
+        
+        List<Bestellung> alleBestellungen = fabrikReferenz.gibAlleBestellungen();
+        
+        if (alleBestellungen.isEmpty()) {
+            System.out.println("Keine Bestellungen vorhanden.");
+        } else {
+            System.out.println("=== Alle Bestellungen aus der Fabrik ===");
+            for (Bestellung b : alleBestellungen) {
+                System.out.println(b.toString());
+            }
+            System.out.println("=== Gesamt: " + alleBestellungen.size() + " Bestellung(en) ===");
+        }
     }
 }
