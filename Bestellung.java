@@ -153,17 +153,29 @@ public class Bestellung {
             System.out.println("\n=== Alle Bestellungen aus der Fabrik ===");
             for (int i = 0; i < alleBestellungen.size(); i++) {
                 Bestellung b = alleBestellungen.get(i);
-                System.out.println(b.toString());
+                System.out.println("\n#### Bestellinformationen ####");
+                System.out.println("Bestellnummer: " + b.gibBestellungsNr());
+                System.out.println("Anzahl Standardtueren: " + b.gibAnzahlStandardTueren());
+                System.out.println("Anzahl Premiumtueren: " + b.gibAnzahlPremiumTueren());
                 
-                // Zeige Details der Produkte
-                System.out.println("  Produkte in dieser Bestellung:");
+                // Bestätigungsstatus ausgeben
+                if (b.gibBestellBestaetigung() == true) {
+                    System.out.println("Bestellung bestaetigt: Ja");
+                } else {
+                    System.out.println("Bestellung bestaetigt: Nein");
+                }
+                
+                System.out.println();
+                System.out.println("#### Tuerinformationen ####");
+                
                 List<Produkt> produkte = b.gibProdukte();
                 for (int j = 0; j < produkte.size(); j++) {
                     Produkt p = produkte.get(j);
+                    System.out.println("Tuernummer: " + j);
                     if (p instanceof Standardtuer) {
-                        System.out.println("    - Standardtuer (Zustand: " + p.aktuellerZustand() + ")");
+                        System.out.println("[Standardtuer]: Zustand: " + p.aktuellerZustand());
                     } else if (p instanceof Premiumtuer) {
-                        System.out.println("    - Premiumtuer (Zustand: " + p.aktuellerZustand() + ")");
+                        System.out.println("[Premiumtuer]: Zustand: " + p.aktuellerZustand());
                     }
                 }
                 System.out.println();
@@ -181,5 +193,38 @@ public class Bestellung {
             return 0;
         }
         return fabrikReferenz.anzahlBestellungen();
+    }
+
+    /**
+     * Gibt die Details dieser Bestellung auf der Konsole aus.
+     * Zeigt Bestellnummer, Anzahl der Türen, Bestätigungsstatus und alle Produkte.
+     */
+    public void bestellungAusgeben() {
+        System.out.println("#### Bestellinformationen ####");
+        System.out.println("Bestellnummer: " + bestellungsNr);
+        System.out.println("Anzahl Standardtueren: " + anzahlStandardTueren);
+        System.out.println("Anzahl Premiumtueren: " + anzahlPremiumTueren);
+        
+        // Bestätigungsstatus der Bestellung ausgeben
+        if (bestellBestaetigung == true) {
+            System.out.println("Bestellung bestaetigt: Ja");
+        } else {
+            System.out.println("Bestellung bestaetigt: Nein");
+        }
+        
+        System.out.println();
+        System.out.println("#### Tuerinformationen ####");
+        
+        // Durch die Liste der bestellten Produkte iterieren
+        for (int i = 0; i < bestellteProdukte.size(); i++) {
+            Produkt p = bestellteProdukte.get(i);
+            System.out.println("Tuernummer: " + i);
+            if (p instanceof Standardtuer) {
+                System.out.println("[Standardtuer]: Zustand: " + p.aktuellerZustand());
+            } else if (p instanceof Premiumtuer) {
+                System.out.println("[Premiumtuer]: Zustand: " + p.aktuellerZustand());
+            }
+        }
+        System.out.println();
     }
 }
