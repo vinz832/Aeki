@@ -37,4 +37,19 @@ public abstract class Produkt {
     public int aktuellerZustand() {
         return zustand;
     }
+
+    /**
+     * Liefert den aktuellen Zustand als lesbaren Text.
+     * @return aktueller Zustand als Text
+     */
+    public String zustandAlsText() {
+        switch (zustand) {
+            case 0: return "BESTELLT";
+            case 1: return "IN_PRODUKTION";
+            case 2: return "FERTIG";
+            case 3: return "TRANSPORTVORBEREITUNG";
+            case 4: return "VERSAND";
+            default: return "UNBEKANNT";
+        }
+    }
 }

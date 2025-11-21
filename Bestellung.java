@@ -68,14 +68,14 @@ public class Bestellung {
      */
     public Bestellung(int bestellungsNr, int anzahlStandardTueren, int anzahlPremiumTueren) {
         this.bestellteProdukte = new ArrayList<>();
-        
+
         if (bestellungsNr <= 0) {
             System.out.println("Fehler: bestellungsNr muss > 0 sein.");
             this.bestellungsNr = 1;
         } else {
             this.bestellungsNr = bestellungsNr;
         }
-        
+
         if (anzahlStandardTueren < 0 || anzahlPremiumTueren < 0) {
             System.out.println("Fehler: Anzahl der Tueren darf nicht negativ sein.");
             this.anzahlStandardTueren = 0;
@@ -91,9 +91,13 @@ public class Bestellung {
         for (int i = 0; i < this.anzahlPremiumTueren; i++) {
             bestellteProdukte.add(new Premiumtuer());
         }
-    }
 
-    public void bestellungBestaetigen() {
+        // Beschaffungszeit automatisch berechnen
+        // Standardtuer: 3 Tage, Premiumtuer: 5 Tage
+        int standardZeit = this.anzahlStandardTueren * 3;
+        int premiumZeit = this.anzahlPremiumTueren * 5;
+        this.beschaffungsZeit = standardZeit + premiumZeit;
+    }    public void bestellungBestaetigen() {
         this.bestellBestaetigung = true;
     }
 
