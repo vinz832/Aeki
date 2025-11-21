@@ -21,11 +21,11 @@ public abstract class Produkt {
     /**
      * Aendert den Zustand des Produkts.
      * @param neuerZustand neuer Zustand (siehe Konstanten in Dokumentation)
-     * @throws IllegalArgumentException bei ungültigem Zustand (negativ)
      */
     public void zustandAendern(int neuerZustand) {
         if (neuerZustand < 0) {
-            throw new IllegalArgumentException("Zustand darf nicht negativ sein: " + neuerZustand);
+            System.out.println("Fehler: Zustand darf nicht negativ sein: " + neuerZustand);
+            return;
         }
         this.zustand = neuerZustand;
     }
