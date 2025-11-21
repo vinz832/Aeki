@@ -152,7 +152,21 @@ public class Bestellung {
         } else {
             System.out.println("\n=== Alle Bestellungen aus der Fabrik ===");
             for (int i = 0; i < alleBestellungen.size(); i++) {
-                System.out.println(alleBestellungen.get(i).toString());
+                Bestellung b = alleBestellungen.get(i);
+                System.out.println(b.toString());
+                
+                // Zeige Details der Produkte
+                System.out.println("  Produkte in dieser Bestellung:");
+                List<Produkt> produkte = b.gibProdukte();
+                for (int j = 0; j < produkte.size(); j++) {
+                    Produkt p = produkte.get(j);
+                    if (p instanceof Standardtuer) {
+                        System.out.println("    - Standardtuer (Zustand: " + p.aktuellerZustand() + ")");
+                    } else if (p instanceof Premiumtuer) {
+                        System.out.println("    - Premiumtuer (Zustand: " + p.aktuellerZustand() + ")");
+                    }
+                }
+                System.out.println();
             }
             System.out.println("=== Gesamt: " + alleBestellungen.size() + " Bestellung(en) ===\n");
         }
