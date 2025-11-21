@@ -38,11 +38,21 @@ public class Bestellung {
     private final int anzahlPremiumTueren;
 
     /**
-     * Konstruktor für Anzeige-Zwecke: Erstellt KEINE neue Bestellung.
+     * Erstellt eine Bestellung-Instanz NUR zum Anzeigen von Bestellungen.
+     * Diese Instanz erstellt KEINE neue Bestellung!
+     * @param fabrik die Fabrik, deren Bestellungen angezeigt werden sollen
+     * @return eine Anzeige-Instanz
+     */
+    public static Bestellung erstelleAnzeigeInstanz(Fabrik fabrik) {
+        return new Bestellung(fabrik);
+    }
+
+    /**
+     * Privater Konstruktor für Anzeige-Zwecke: Erstellt KEINE neue Bestellung.
      * Dieser Konstruktor dient nur zum Anzeigen von Bestellungen aus der Fabrik.
      * @param fabrik die Fabrik, deren Bestellungen angezeigt werden sollen
      */
-    public Bestellung(Fabrik fabrik) {
+    private Bestellung(Fabrik fabrik) {
         if (fabrik == null) {
             throw new IllegalArgumentException("Fabrik darf nicht null sein.");
         }
