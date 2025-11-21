@@ -30,15 +30,15 @@ public class Fabrik {
     public static void main(String[] args) {
         Fabrik fabrik = new Fabrik();
         
-        // Fabrik-Referenz in Bestellung setzen
-        Bestellung.setzeFabrik(fabrik);
-        
+        // Bestellungen in der Fabrik aufgeben
         fabrik.bestellungAufgeben(2, 1);
         fabrik.bestellungAufgeben(0, 2);
         fabrik.bestellungenAusgeben();
         
-        System.out.println("\n--- Bestellungen über Bestellung-Klasse anzeigen ---");
-        Bestellung.alleBestellungenAnzeigen();
+        // Bestellung-Instanz NUR zum Anzeigen erstellen (keine echte Bestellung!)
+        System.out.println("\n--- Bestellungen über Bestellung-Anzeige anzeigen ---");
+        Bestellung anzeige = new Bestellung(fabrik);
+        anzeige.alleBestellungenAnzeigen();
     }
 
     /**

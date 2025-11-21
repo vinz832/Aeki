@@ -2,7 +2,22 @@
  * Testprogramm für die statischen Methoden der Produktklassen.
  */
 public class TestStatischeMethoden {
-    public static void main(String[] args) {
+    // Instanzvariablen für BlueJ-Verbindungen
+    private Standardtuer standardBeispiel;
+    private Premiumtuer premiumBeispiel;
+    
+    /**
+     * Konstruktor - erstellt Beispiel-Instanzen
+     */
+    public TestStatischeMethoden() {
+        standardBeispiel = new Standardtuer();
+        premiumBeispiel = new Premiumtuer();
+    }
+    
+    /**
+     * Testet und zeigt alle Material-Informationen an.
+     */
+    public void materialInformationenAnzeigen() {
         System.out.println("=== Standardtür - Material-Informationen ===");
         System.out.println("Holzeinheiten: " + Standardtuer.gibHolzeinheiten());
         System.out.println("Schrauben: " + Standardtuer.gibSchrauben());
@@ -15,5 +30,10 @@ public class TestStatischeMethoden {
         System.out.println("Glaseinheiten: " + Premiumtuer.gibGlaseinheiten());
         System.out.println("Türgriffe: " + Premiumtuer.gibTuergriffe());
         System.out.println("Verwendeter Lack: " + Premiumtuer.gibVerwendeterLack());
+    }
+    
+    public static void main(String[] args) {
+        TestStatischeMethoden test = new TestStatischeMethoden();
+        test.materialInformationenAnzeigen();
     }
 }

@@ -22,8 +22,8 @@ import java.util.List;
  * Zeigt auch alle Bestellungen aus der Fabrik an.
  */
 public class Bestellung {
-    // Referenz zur Fabrik, um alle Bestellungen anzuzeigen
-    private static Fabrik fabrikReferenz;
+    // Referenz zur Fabrik für Anzeige-Instanzen
+    private Fabrik fabrikReferenz;
 
     private final List<Produkt> bestellteProdukte = new ArrayList<>();
 
@@ -36,6 +36,22 @@ public class Bestellung {
     private final int anzahlStandardTueren;
 
     private final int anzahlPremiumTueren;
+
+    /**
+     * Konstruktor für Anzeige-Zwecke: Erstellt KEINE neue Bestellung.
+     * Dieser Konstruktor dient nur zum Anzeigen von Bestellungen aus der Fabrik.
+     * @param fabrik die Fabrik, deren Bestellungen angezeigt werden sollen
+     */
+    public Bestellung(Fabrik fabrik) {
+        if (fabrik == null) {
+            throw new IllegalArgumentException("Fabrik darf nicht null sein.");
+        }
+        this.fabrikReferenz = fabrik;
+        // Keine echte Bestellung - nur für Anzeige
+        this.bestellungsNr = 0;
+        this.anzahlStandardTueren = 0;
+        this.anzahlPremiumTueren = 0;
+    }
 
     /**
      * Konstruktor: erstellt die Bestellung und legt die Produkte an.
@@ -104,20 +120,13 @@ public class Bestellung {
     }
 
     /**
-     * Setzt die Fabrik-Referenz, um auf alle Bestellungen zugreifen zu können.
-     * @param fabrik die Fabrik-Instanz
-     */
-    public static void setzeFabrik(Fabrik fabrik) {
-        fabrikReferenz = fabrik;
-    }
-
-    /**
      * Zeigt alle Bestellungen aus der Fabrik an.
+     * Diese Methode funktioniert nur bei Instanzen, die mit dem Fabrik-Konstruktor erstellt wurden.
      * Es werden KEINE neuen Bestellungen aufgegeben, sondern nur die vorhandenen angezeigt.
      */
-    public static void alleBestellungenAnzeigen() {
+    public void alleBestellungenAnzeigen() {
         if (fabrikReferenz == null) {
-            System.out.println("Keine Fabrik gesetzt. Bitte zuerst Bestellung.setzeFabrik() aufrufen.");
+            System.out.println("Diese Bestellung-Instanz ist keine Anzeige-Instanz.");
             return;
         }
         
@@ -126,11 +135,22 @@ public class Bestellung {
         if (alleBestellungen.isEmpty()) {
             System.out.println("Keine Bestellungen vorhanden.");
         } else {
-            System.out.println("=== Alle Bestellungen aus der Fabrik ===");
+            System.out.println("\n=== Alle Bestellungen aus der Fabrik ===");
             for (Bestellung b : alleBestellungen) {
                 System.out.println(b.toString());
             }
-            System.out.println("=== Gesamt: " + alleBestellungen.size() + " Bestellung(en) ===");
+            System.out.println("=== Gesamt: " + alleBestellungen.size() + " Bestellung(en) ===\n");
         }
+    }
+
+    /**
+     * Gibt die Anzahl der Bestellungen zurück (nur für Anzeige-Instanzen).
+     * @return Anzahl der Bestellungen oder 0 wenn keine Anzeige-Instanz
+     */
+    public int gibAnzahlAllerBestellungen() {
+        if (fabrikReferenz == null) {
+            return 0;
+        }
+        return fabrikReferenz.anzahlBestellungen();
     }
 }
