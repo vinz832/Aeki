@@ -14,7 +14,6 @@
  * @version (eine Versionsnummer oder ein Datum)
  */
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,24 +24,24 @@ public class Bestellung {
     // Referenz zur Fabrik für Anzeige-Instanzen
     private Fabrik fabrikReferenz;
 
-    private final List<Produkt> bestellteProdukte = new ArrayList<>();
+    private List<Produkt> bestellteProdukte;
 
     private boolean bestellBestaetigung;
 
     private int beschaffungsZeit;
 
-    private final int bestellungsNr;
+    private int bestellungsNr;
 
-    private final int anzahlStandardTueren;
+    private int anzahlStandardTueren;
 
-    private final int anzahlPremiumTueren;
+    private int anzahlPremiumTueren;
 
     /**
      * Konstruktor für Anzeige-Zwecke: Erstellt KEINE neue Bestellung.
      * Verwende setztFabrik() um die Fabrik zu setzen, dann alleBestellungenAnzeigen().
      */
     public Bestellung() {
-        // Keine echte Bestellung - nur für Anzeige
+        this.bestellteProdukte = new ArrayList<>();
         this.bestellungsNr = 0;
         this.anzahlStandardTueren = 0;
         this.anzahlPremiumTueren = 0;
@@ -55,7 +54,8 @@ public class Bestellung {
      */
     public void setztFabrik(Fabrik fabrik) {
         if (fabrik == null) {
-            throw new IllegalArgumentException("Fabrik darf nicht null sein.");
+            System.out.println("Fehler: Fabrik darf nicht null sein.");
+            return;
         }
         this.fabrikReferenz = fabrik;
     }
@@ -67,20 +67,28 @@ public class Bestellung {
      * @param anzahlPremiumTueren >=0
      */
     public Bestellung(int bestellungsNr, int anzahlStandardTueren, int anzahlPremiumTueren) {
+        this.bestellteProdukte = new ArrayList<>();
+        
         if (bestellungsNr <= 0) {
-            throw new IllegalArgumentException("bestellungsNr muss > 0 sein.");
+            System.out.println("Fehler: bestellungsNr muss > 0 sein.");
+            this.bestellungsNr = 1;
+        } else {
+            this.bestellungsNr = bestellungsNr;
         }
+        
         if (anzahlStandardTueren < 0 || anzahlPremiumTueren < 0) {
-            throw new IllegalArgumentException("Anzahl der Tueren darf nicht negativ sein.");
+            System.out.println("Fehler: Anzahl der Tueren darf nicht negativ sein.");
+            this.anzahlStandardTueren = 0;
+            this.anzahlPremiumTueren = 0;
+        } else {
+            this.anzahlStandardTueren = anzahlStandardTueren;
+            this.anzahlPremiumTueren = anzahlPremiumTueren;
         }
-        this.bestellungsNr = bestellungsNr;
-        this.anzahlStandardTueren = anzahlStandardTueren;
-        this.anzahlPremiumTueren = anzahlPremiumTueren;
 
-        for (int i = 0; i < anzahlStandardTueren; i++) {
+        for (int i = 0; i < this.anzahlStandardTueren; i++) {
             bestellteProdukte.add(new Standardtuer());
         }
-        for (int i = 0; i < anzahlPremiumTueren; i++) {
+        for (int i = 0; i < this.anzahlPremiumTueren; i++) {
             bestellteProdukte.add(new Premiumtuer());
         }
     }
@@ -95,7 +103,8 @@ public class Bestellung {
 
     public void setzeBeschaffungsZeit(int tage) {
         if (tage < 0) {
-            throw new IllegalArgumentException("Beschaffungszeit darf nicht negativ sein.");
+            System.out.println("Fehler: Beschaffungszeit darf nicht negativ sein.");
+            return;
         }
         this.beschaffungsZeit = tage;
     }
@@ -117,13 +126,12 @@ public class Bestellung {
     }
 
     public List<Produkt> gibProdukte() {
-        return Collections.unmodifiableList(bestellteProdukte);
+        return bestellteProdukte;
     }
 
-    @Override
     public String toString() {
-        return String.format("#%d: %dx Standard, %dx Premium (Produkte: %d)",
-                bestellungsNr, anzahlStandardTueren, anzahlPremiumTueren, bestellteProdukte.size());
+        return "#" + bestellungsNr + ": " + anzahlStandardTueren + "x Standard, " + 
+               anzahlPremiumTueren + "x Premium (Produkte: " + bestellteProdukte.size() + ")";
     }
 
     /**
@@ -139,12 +147,12 @@ public class Bestellung {
         
         List<Bestellung> alleBestellungen = fabrikReferenz.gibAlleBestellungen();
         
-        if (alleBestellungen.isEmpty()) {
+        if (alleBestellungen.size() == 0) {
             System.out.println("Keine Bestellungen vorhanden.");
         } else {
             System.out.println("\n=== Alle Bestellungen aus der Fabrik ===");
-            for (Bestellung b : alleBestellungen) {
-                System.out.println(b.toString());
+            for (int i = 0; i < alleBestellungen.size(); i++) {
+                System.out.println(alleBestellungen.get(i).toString());
             }
             System.out.println("=== Gesamt: " + alleBestellungen.size() + " Bestellung(en) ===\n");
         }

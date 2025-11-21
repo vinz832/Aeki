@@ -19,9 +19,11 @@ import java.util.List;
  * Fabrik nimmt Bestellungen entgegen und gibt sie auf der Konsole aus.
  */
 public class Fabrik {
-    private final List<Bestellung> bestellungen = new ArrayList<>();
+    private List<Bestellung> bestellungen;
 
-    // alternativ: private int bestellungsNr = 1;
+    public Fabrik() {
+        bestellungen = new ArrayList<>();
+    }
 
     /**
      * Demo-Programm: legt 2-3 Bestellungen an und gibt sie aus.
@@ -49,10 +51,12 @@ public class Fabrik {
      */
     public void bestellungAufgeben(int standardTueren, int premiumTueren) {
         if (standardTueren < 0 || premiumTueren < 0) {
-            throw new IllegalArgumentException("Mengen dürfen nicht negativ sein.");
+            System.out.println("Fehler: Mengen dürfen nicht negativ sein.");
+            return;
         }
         if (standardTueren == 0 && premiumTueren == 0) {
-            throw new IllegalArgumentException("Es wurden keine Produkte bestellt.");
+            System.out.println("Fehler: Es wurden keine Produkte bestellt.");
+            return;
         }
 
         int id = IdGenerator.nextOrderId();
@@ -65,8 +69,8 @@ public class Fabrik {
      * Gibt alle Bestellungen kompakt auf der Konsole aus.
      */
     public void bestellungenAusgeben() {
-        for (Bestellung b : bestellungen) {
-            System.out.println(b.toString());
+        for (int i = 0; i < bestellungen.size(); i++) {
+            System.out.println(bestellungen.get(i).toString());
         }
     }
 
