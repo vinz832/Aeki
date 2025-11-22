@@ -76,7 +76,7 @@ public class Fabrik {
         }
 
         int id = IdGenerator.nextOrderId();
-        Bestellung b = new Bestellung(id, standardTueren, premiumTueren);
+        Bestellung b = new Bestellung(id, standardTueren, premiumTueren, this);
         bestellungen.add(b);
         
         //Konsolausgabe der neu angelegten Bestellung

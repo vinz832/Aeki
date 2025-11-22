@@ -74,7 +74,19 @@ public class Bestellung {
      * @param anzahlPremiumTueren >=0
      */
     public Bestellung(int bestellungsNr, int anzahlStandardTueren, int anzahlPremiumTueren) {
+        this(bestellungsNr, anzahlStandardTueren, anzahlPremiumTueren, null);
+    }
+
+    /**
+     * Konstruktor: erstellt die Bestellung und legt die Produkte an.
+     * @param bestellungsNr laufende Bestellnummer (>0)
+     * @param anzahlStandardTueren >=0
+     * @param anzahlPremiumTueren >=0
+     * @param fabrik Referenz zur Fabrik (kann null sein)
+     */
+    public Bestellung(int bestellungsNr, int anzahlStandardTueren, int anzahlPremiumTueren, Fabrik fabrik) {
         this.bestellteProdukte = new ArrayList<>();
+        this.fabrikReferenz = fabrik;
 
         if (bestellungsNr <= 0) {
             System.out.println("Fehler: bestellungsNr muss > 0 sein.");
