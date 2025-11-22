@@ -1,5 +1,7 @@
 /**
  * Testprogramm für die statischen Methoden der Produktklassen.
+ * Diese Klasse dient NICHT als JUnit-Test, sondern als kleines Konsolen-
+ * Testprogramm, das in BlueJ ausgeführt werden kann. 
  */
 public class TestStatischeMethoden {
     // Instanzvariablen für BlueJ-Verbindungen
@@ -16,6 +18,8 @@ public class TestStatischeMethoden {
     
     /**
      * Testet und zeigt alle Material-Informationen an.
+     * Gibt alle Materialeigenschaften von Standardtür und Premiumtür
+     * über die statischen Getter-Methoden aus.
      */
     public void materialInformationenAnzeigen() {
         System.out.println("=== Standardtür - Material-Informationen ===");
@@ -32,6 +36,10 @@ public class TestStatischeMethoden {
         System.out.println("Verwendeter Lack: " + Premiumtuer.gibVerwendeterLack());
     }
     
+      /**
+     * Startpunkt des Testprogramms.
+     * Führt eine Ausgabe aller Materialwerte durch.
+     */
     public static void main(String[] args) {
         TestStatischeMethoden test = new TestStatischeMethoden();
         test.materialInformationenAnzeigen();

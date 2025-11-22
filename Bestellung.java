@@ -5,7 +5,7 @@
     • Enthält als Instanzvariablen:
         ○ Bestellbestätigung,
         ○ Beschaffungszeit,
-        ○  Bestellnummer, 
+        ○ Bestellnummer, 
         ○ wie auch die Anzahl bestellter Standardtüren und die Anzahl bestellter Premiumtüren.
         
     • Zu jeder Instanzvariablen muss jeweils eine Methode implementiert werden, um die Information abzufragen. Bei gewissen Instanzvariablen muss auch eine Methode vorhanden sein, um die Information in den Variablen zu ändern.
@@ -23,23 +23,30 @@ import java.util.List;
 public class Bestellung {
     // Referenz zur Fabrik für Anzeige-Instanzen
     private Fabrik fabrikReferenz;
-
+    
+    //Liste aller Produkte, die zu dieser Bestellung gehören.
+    //Enthält nach dem Konstruktor genau so viele Produkte wie bestellt wurden.
     private List<Produkt> bestellteProdukte;
 
     private boolean bestellBestaetigung;
-
+    
+    //Beschaffungszeit in Tage, wird im konstruktor automatisch berechnetm kann aber angepasst werden
     private int beschaffungsZeit;
 
+    //Eindeutige Bestellnummer der Bestellung
     private int bestellungsNr;
 
+    //Anzahl bestellter Standardtüren (>= 0)
     private int anzahlStandardTueren;
 
+    //Anzahl bestellter Premiumtüren (>= 0)
     private int anzahlPremiumTueren;
 
     /**
      * Konstruktor für Anzeige-Zwecke: Erstellt KEINE neue Bestellung.
      * Verwende setztFabrik() um die Fabrik zu setzen, dann alleBestellungenAnzeigen().
      */
+    
     public Bestellung() {
         this.bestellteProdukte = new ArrayList<>();
         this.bestellungsNr = 0;

@@ -17,10 +17,16 @@ import java.util.List;
 
 /**
  * Fabrik nimmt Bestellungen entgegen und gibt sie auf der Konsole aus.
+ * Funktion: Entgegennehmen neuer Bestellungen (mit Validierung)
+ * Eine Fabrik erzeugt selbst keine Produkte – das geschieht in der Klasse Bestellung,
+ * sobald bestellungAufgeben(...) aufgerufen wird.
  */
 public class Fabrik {
+    
+    //Interne Liste aller Besttelungenm die in der Fabrik aufgegeben wurden
     private List<Bestellung> bestellungen;
 
+    //Erstellt eine neue leere Fabrik
     public Fabrik() {
         bestellungen = new ArrayList<>();
     }
@@ -46,6 +52,15 @@ public class Fabrik {
 
     /**
      * Aufgabe einer Bestellung.
+     * Validierung:
+     * - Mengen dürfen nicht negativ sein
+     * - Mindestens ein Produkt muss bestellt werden
+     *
+     * Bei erfolgreicher Bestellung:
+     * - wird eine eindeutige Bestellnummer über den IdGenerator vergeben
+     * - werden die entsprechenden Produkte in der Bestellung erzeugt
+     * - wird die Bestellung zur internen Liste hinzugefügt
+     * 
      * @param standardTueren Anzahl Standardtüren (>=0)
      * @param premiumTueren Anzahl Premiumtüren (>=0)
      */
@@ -62,11 +77,14 @@ public class Fabrik {
         int id = IdGenerator.nextOrderId();
         Bestellung b = new Bestellung(id, standardTueren, premiumTueren);
         bestellungen.add(b);
+        
+        //Konsolausgabe der neu angelegten Bestellung
         System.out.println(b.toString());
     }
 
     /**
      * Gibt alle Bestellungen kompakt auf der Konsole aus.
+     * Jede Bestellung wird mit ihrer Bestellnummer und Produktanzahl dargestellt.
      */
     public void bestellungenAusgeben() {
         for (int i = 0; i < bestellungen.size(); i++) {
@@ -75,6 +93,8 @@ public class Fabrik {
     }
 
     // Hilfsmethode für Tests: Anzahl Bestellungen
+    //Liefer die Anzahl aller bisher aufgegebenen Bestellungen dieser Fabrik
+    //@return Anzahl der Bestellungen
     public int anzahlBestellungen() {
         return bestellungen.size();
     }

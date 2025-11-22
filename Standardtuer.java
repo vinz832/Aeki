@@ -21,6 +21,8 @@ Auch die Methoden, um auf diese Information zuzugreifen, gehören der Klasse an 
 
  */
 public class Standardtuer extends Produkt {
+    
+    //Anzahl Einheiten und Materialien die für eine Standardtür benötigt werden
     public static final int HOLZEINHEITEN = 5;
     public static final int SCHRAUBEN = 10;
     public static final int TUERGRIFFE = 1;

@@ -1,9 +1,13 @@
  
 
 /**
+ * Modelliert eine Premiumtuer in der Fabrik.
+ *
  * Premiumtuer mit Glas.
  */
 public class Premiumtuer extends Produkt {
+    
+    //Die ganzen benötigten Materialien für eine Premiumtür
     public static final int HOLZEINHEITEN = 6;
     public static final int SCHRAUBEN = 12;
     public static final int GLASEINHEITEN = 2;
@@ -12,6 +16,8 @@ public class Premiumtuer extends Produkt {
     public static final int KARTONEINHEITEN = 1;
     public static final int PRODUKTIONSZEIT = 5; // in Tagen (Beispiel)
 
+    //Erzeugt eine neue Premiumtür
+    //Die tür startet im Zustand BESTELLT (0)
     public Premiumtuer() {
         super();
     }

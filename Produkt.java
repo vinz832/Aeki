@@ -19,7 +19,8 @@ public abstract class Produkt {
     protected int zustand = 0;
 
     /**
-     * Aendert den Zustand des Produkts.
+     * Ändert den Zustand des Produkts.
+     * Negative Werte werden nicht akzeptiert
      * @param neuerZustand neuer Zustand (siehe Konstanten in Dokumentation)
      */
     public void zustandAendern(int neuerZustand) {
