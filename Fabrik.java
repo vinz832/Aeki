@@ -6,8 +6,8 @@
     • Enthält eine ArrayList in der alle Bestellungen gespeichert werden 
     • enthält die Methode main, die den Einstieg in das Programm ermöglicht
 
- * @author (Ihr Name) Moacir, Owen, Mathieu, Alexander, Vinzenz
- * @version (eine Versionsnummer oder ein Datum)
+ * @author Moacir, Owen, Mathieu, Alexander, Vinzenz
+ * @version (23.11.2025)
  */
  
 

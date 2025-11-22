@@ -10,8 +10,8 @@
         
     • Zu jeder Instanzvariablen muss jeweils eine Methode implementiert werden, um die Information abzufragen. Bei gewissen Instanzvariablen muss auch eine Methode vorhanden sein, um die Information in den Variablen zu ändern.
 
- * @author (Ihr Name) Owen, Alexander, Moacir, Mathieu, Vinzenz
- * @version (eine Versionsnummer oder ein Datum)
+ * @author Owen, Alexander, Moacir, Mathieu, Vinzenz
+ * @version 23.11.2023
  */
 import java.util.ArrayList;
 import java.util.List;

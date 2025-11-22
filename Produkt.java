@@ -4,8 +4,8 @@
  * Können entweder Standarttüren oder Premiumtüren sein. 
  * Abstrakte Basisklasse fuer Produkte.
 
- * @author (Ihr Name) Owen, Mathieu, Alexander, Moacir, Vinzenz
- * @version (eine Versionsnummer oder ein Datum)
+ * @author Owen, Mathieu, Alexander, Moacir, Vinzenz
+ * @version 23.11.2025
  */
 public abstract class Produkt {
     /**

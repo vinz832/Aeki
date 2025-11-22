@@ -15,8 +15,8 @@
         ○ Anzahl Türgriffe 
         ○ Verwendeter Lack 
 Auch die Methoden, um auf diese Information zuzugreifen, gehören der Klasse an und nicht den einzelnen Instanzen.
- * @author (Ihr Name) Moacir, Owen, Alexander, Mathieu, Vinzenz
- * @version (eine Versionsnummer oder ein Datum)
+ * @author  Moacir, Owen, Alexander, Mathieu, Vinzenz
+ * @version 23.11.2025
 
 
  */

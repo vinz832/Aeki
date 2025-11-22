@@ -3,8 +3,8 @@
  * Beschreiben Sie hier die Klasse ID Generator,
  * ID-Generator für Bestellnummern.
 
- * @author (Ihr Name) Owen, Mathieu, Alexander, Moacir, Vinzenz
- * @version (eine Versionsnummer oder ein Datum)
+ * @author Owen, Mathieu, Alexander, Moacir, Vinzenz
+ * @version 23.11.2025
  */
 
 public final class IdGenerator {
