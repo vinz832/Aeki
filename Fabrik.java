@@ -63,15 +63,16 @@ public class Fabrik {
      * 
      * @param standardTueren Anzahl Standardtüren (>=0)
      * @param premiumTueren Anzahl Premiumtüren (>=0)
+     * @return die erstellte Bestellung oder null bei Fehler
      */
-    public void bestellungAufgeben(int standardTueren, int premiumTueren) {
+    public Bestellung bestellungAufgeben(int standardTueren, int premiumTueren) {
         if (standardTueren < 0 || premiumTueren < 0) {
             System.out.println("Fehler: Mengen dürfen nicht negativ sein.");
-            return;
+            return null;
         }
         if (standardTueren == 0 && premiumTueren == 0) {
             System.out.println("Fehler: Es wurden keine Produkte bestellt.");
-            return;
+            return null;
         }
 
         int id = IdGenerator.nextOrderId();
@@ -80,6 +81,7 @@ public class Fabrik {
         
         //Konsolausgabe der neu angelegten Bestellung
         System.out.println(b.toString());
+        return b;
     }
 
     /**
