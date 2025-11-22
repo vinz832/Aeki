@@ -184,9 +184,9 @@ public class Bestellung {
                     Produkt p = produkte.get(j);
                     System.out.println("Tuernummer: " + j);
                     if (p instanceof Standardtuer) {
-                        System.out.println("[Standardtuer]: Zustand: " + p.aktuellerZustand());
+                        System.out.println("[Standardtuer]: Zustand: " + p.zustandAlsText());
                     } else if (p instanceof Premiumtuer) {
-                        System.out.println("[Premiumtuer]: Zustand: " + p.aktuellerZustand());
+                        System.out.println("[Premiumtuer]: Zustand: " + p.zustandAlsText());
                     }
                 }
                 System.out.println();
@@ -231,9 +231,9 @@ public class Bestellung {
             Produkt p = bestellteProdukte.get(i);
             System.out.println("Tuernummer: " + i);
             if (p instanceof Standardtuer) {
-                System.out.println("[Standardtuer]: Zustand: " + p.aktuellerZustand());
+                System.out.println("[Standardtuer]: Zustand: " + p.zustandAlsText());
             } else if (p instanceof Premiumtuer) {
-                System.out.println("[Premiumtuer]: Zustand: " + p.aktuellerZustand());
+                System.out.println("[Premiumtuer]: Zustand: " + p.zustandAlsText());
             }
         }
         System.out.println();
