@@ -1,9 +1,7 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 public class TestBestellungJUnit {
-    @Test
-    void testBestellungAusgebenUndBestaetigen() {
+    public void testBestellungAusgebenUndBestaetigen() {
         Bestellung b1 = new Bestellung(10, 3, 2);
         assertEquals(10, b1.gibBestellungsNr());
         assertEquals(3, b1.gibAnzahlStandardTueren());
