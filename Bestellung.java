@@ -10,7 +10,7 @@
         
     • Zu jeder Instanzvariablen muss jeweils eine Methode implementiert werden, um die Information abzufragen. Bei gewissen Instanzvariablen muss auch eine Methode vorhanden sein, um die Information in den Variablen zu ändern.
 
- * @author Owen, Alexander, Moacir, Mathieu, Vinzenz
+ * @author Owen R.., Alexander, Moacir, Mathieu, Vinzenz
  * @version 23.11.2025
  */
 import java.util.ArrayList;
