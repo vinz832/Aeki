@@ -1,4 +1,4 @@
- 
+
 /**
  * Beschreiben Sie hier die Klasse Produkt.
  * Können entweder Standarttüren oder Premiumtüren sein. 
