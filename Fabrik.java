@@ -1,3 +1,5 @@
+ Test ob gruppenarbeit funktioniert Moacir
+ 
  
 /**
  * Beschreiben Sie hier die Klasse Fabrik.
