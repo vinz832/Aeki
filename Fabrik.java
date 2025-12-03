@@ -23,13 +23,14 @@ import java.util.List;
  * sobald bestellungAufgeben(...) aufgerufen wird.
  */
 public class Fabrik {
-    
-    //Interne Liste aller Besttelungenm die in der Fabrik aufgegeben wurden
     private List<Bestellung> bestellungen;
+    private Lager lager;
+    private Lieferant lieferant;
 
-    //Erstellt eine neue leere Fabrik
     public Fabrik() {
         bestellungen = new ArrayList<>();
+        lager = new Lager();
+        lieferant = new Lieferant();
     }
 
     /**
@@ -78,9 +79,26 @@ public class Fabrik {
 
         int id = IdGenerator.nextOrderId();
         Bestellung b = new Bestellung(id, standardTueren, premiumTueren, this);
-        bestellungen.add(b);
         
-        //Konsolausgabe der neu angelegten Bestellung
+        // Produktionszeit berechnen
+        int produktionsZeit = standardTueren * Standardtuer.PRODUKTIONSZEIT
+                            + premiumTueren * Premiumtuer.PRODUKTIONSZEIT;
+
+        // Beschaffungszeit beim Lager erfragen
+        int beschaffungsZeit = lager.gibBeschaffungsZeit(b);
+
+        // Falls Material fehlte, Lager auffüllen
+        if (beschaffungsZeit == 2) {
+            lager.lagerAuffuellen(lieferant);
+        }
+
+        // Lieferzeit: Produktionszeit + Beschaffungszeit + Standardlieferzeit (1 Tag)
+        int lieferZeit = produktionsZeit + beschaffungsZeit + 1;
+
+        b.setzeBeschaffungsZeit(beschaffungsZeit);
+        b.setzeLieferZeit(lieferZeit);
+
+        bestellungen.add(b);
         System.out.println(b.toString());
         return b;
     }
@@ -91,7 +109,10 @@ public class Fabrik {
      */
     public void bestellungenAusgeben() {
         for (int i = 0; i < bestellungen.size(); i++) {
-            System.out.println(bestellungen.get(i).toString());
+            Bestellung b = bestellungen.get(i);
+            System.out.println(b.toString());
+            System.out.println("Beschaffungszeit: " + b.gibBeschaffungsZeit() + " Tag(e)");
+            System.out.println("Lieferzeit: " + b.gibLieferZeit() + " Tag(e)");
         }
     }
 

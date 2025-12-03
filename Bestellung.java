@@ -32,6 +32,7 @@ public class Bestellung {
     
     //Beschaffungszeit in Tage, wird im konstruktor automatisch berechnetm kann aber angepasst werden
     private int beschaffungsZeit;
+    private int lieferZeit;
 
     //Eindeutige Bestellnummer der Bestellung
     private int bestellungsNr;
@@ -134,6 +135,18 @@ public class Bestellung {
 
     public int gibBeschaffungsZeit() {
         return beschaffungsZeit;
+    }
+
+    public void setzeLieferZeit(int tage) {
+        if (tage < 0) {
+            System.out.println("Fehler: Lieferzeit darf nicht negativ sein.");
+            return;
+        }
+        this.lieferZeit = tage;
+    }
+
+    public int gibLieferZeit() {
+        return lieferZeit;
     }
 
     public int gibBestellungsNr() {
