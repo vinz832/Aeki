@@ -34,6 +34,20 @@ public class Fabrik {
     }
 
     /**
+     * Liefert die Lager-Instanz dieser Fabrik (für BlueJ-Inspektion/Verknüpfungen).
+     */
+    public Lager getLager() {
+        return lager;
+    }
+
+    /**
+     * Liefert die Lieferant-Instanz dieser Fabrik (für BlueJ-Inspektion/Verknüpfungen).
+     */
+    public Lieferant getLieferant() {
+        return lieferant;
+    }
+
+    /**
      * Demo-Programm: legt 2-3 Bestellungen an und gibt sie aus.
      * @param args keine speziellen Argumente erforderlich
      */
