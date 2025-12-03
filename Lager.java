@@ -1,11 +1,11 @@
-    // Singleton instance to ensure a single global stock source
-    private static final Lager INSTANCE = new Lager(true);
 import java.util.List;
 
 /**
  * Lager verwaltet Materialbestände und ermittelt Beschaffungszeiten.
  */
 public class Lager {
+    // Singleton instance to ensure a single global stock source
+    private static final Lager INSTANCE = new Lager();
     private static final int MAXHOLZEINHEITEN = 100;
     private static final int MAXSCHRAUBEN = 500;
     private static final int MAXFARBEINHEITEN = 200;
@@ -17,26 +17,18 @@ public class Lager {
     private int farbe;
     private int karton;
     private int glas;
-    // Private default constructor; delegates to flagged constructor
+    // Private constructor initializes the stock to max values
     private Lager() {
-        this(false);
-    }
-
-    // Internal constructor to allow INSTANCE initialization
-    private Lager(boolean internal) {
-    }
-
-    // Global accessor: always use this to get the shared Lager
-    public static Lager getInstance() {
-        return INSTANCE;
-    }
-
-    public Lager() {
         holz = MAXHOLZEINHEITEN;
         schrauben = MAXSCHRAUBEN;
         farbe = MAXFARBEINHEITEN;
         karton = MAXKARTONEINHEITEN;
         glas = MAXGLASEINHEITEN;
+    }
+
+    // Global accessor: always use this to get the shared Lager
+    public static Lager getInstance() {
+        return INSTANCE;
     }
 
     /**
