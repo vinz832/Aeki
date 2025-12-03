@@ -24,13 +24,12 @@ import java.util.List;
  */
 public class Fabrik {
     private List<Bestellung> bestellungen;
-    private Lager lager;
-    private Lieferant lieferant;
+    // Globales, gemeinsames Lager und Lieferant für alle Fabrik-Instanzen
+    private static final Lager lager = new Lager();
+    private static final Lieferant lieferant = new Lieferant();
 
     public Fabrik() {
         bestellungen = new ArrayList<>();
-        lager = new Lager();
-        lieferant = new Lieferant();
     }
 
     /**
@@ -45,6 +44,23 @@ public class Fabrik {
      */
     public Lieferant getLieferant() {
         return lieferant;
+    }
+
+    /**
+     * Reserviert Material im globalen Lager und setzt Beschaffungszeit/Lieferzeit.
+     * Wird beim Bestaetigen der Bestellung aufgerufen.
+     */
+    public void reserveMaterialFuer(Bestellung b) {
+        int beschaffungsZeit = lager.gibBeschaffungsZeit(b);
+        if (beschaffungsZeit == 2) {
+            // Material war knapp – nachbestellen
+            lager.lagerAuffuellen(lieferant);
+        }
+        int produktionsZeit = b.gibAnzahlStandardTueren() * Standardtuer.PRODUKTIONSZEIT
+                            + b.gibAnzahlPremiumTueren() * Premiumtuer.PRODUKTIONSZEIT;
+        int lieferZeit = produktionsZeit + beschaffungsZeit + 1;
+        b.setzeBeschaffungsZeit(beschaffungsZeit);
+        b.setzeLieferZeit(lieferZeit);
     }
 
     /**
@@ -93,24 +109,12 @@ public class Fabrik {
 
         int id = IdGenerator.nextOrderId();
         Bestellung b = new Bestellung(id, standardTueren, premiumTueren, this);
-        
-        // Produktionszeit berechnen
+
+        // Vorläufige Lieferzeit ohne Materialreservierung (wird bei Bestaetigung gesetzt)
         int produktionsZeit = standardTueren * Standardtuer.PRODUKTIONSZEIT
                             + premiumTueren * Premiumtuer.PRODUKTIONSZEIT;
-
-        // Beschaffungszeit beim Lager erfragen
-        int beschaffungsZeit = lager.gibBeschaffungsZeit(b);
-
-        // Falls Material fehlte, Lager auffüllen
-        if (beschaffungsZeit == 2) {
-            lager.lagerAuffuellen(lieferant);
-        }
-
-        // Lieferzeit: Produktionszeit + Beschaffungszeit + Standardlieferzeit (1 Tag)
-        int lieferZeit = produktionsZeit + beschaffungsZeit + 1;
-
-        b.setzeBeschaffungsZeit(beschaffungsZeit);
-        b.setzeLieferZeit(lieferZeit);
+        b.setzeBeschaffungsZeit(0);
+        b.setzeLieferZeit(produktionsZeit + 1);
 
         bestellungen.add(b);
         System.out.println(b.toString());

@@ -119,6 +119,10 @@ public class Bestellung {
         this.beschaffungsZeit = standardZeit + premiumZeit;
     }    public void bestellungBestaetigen() {
         this.bestellBestaetigung = true;
+        // Bei Bestaetigung Material reservieren und Zeiten setzen
+        if (fabrikReferenz != null) {
+            fabrikReferenz.reserveMaterialFuer(this);
+        }
     }
 
     public boolean gibBestellBestaetigung() {
