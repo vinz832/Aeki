@@ -1,3 +1,5 @@
+    // Singleton instance to ensure a single global stock source
+    private static final Lager INSTANCE = new Lager(true);
 import java.util.List;
 
 /**
@@ -15,6 +17,19 @@ public class Lager {
     private int farbe;
     private int karton;
     private int glas;
+    // Private default constructor; delegates to flagged constructor
+    private Lager() {
+        this(false);
+    }
+
+    // Internal constructor to allow INSTANCE initialization
+    private Lager(boolean internal) {
+    }
+
+    // Global accessor: always use this to get the shared Lager
+    public static Lager getInstance() {
+        return INSTANCE;
+    }
 
     public Lager() {
         holz = MAXHOLZEINHEITEN;

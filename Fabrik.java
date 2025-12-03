@@ -25,7 +25,7 @@ import java.util.List;
 public class Fabrik {
     private List<Bestellung> bestellungen;
     // Globales, gemeinsames Lager und Lieferant für alle Fabrik-Instanzen
-    private static final Lager lager = new Lager();
+    private static final Lager lager = Lager.getInstance();
     private static final Lieferant lieferant = new Lieferant();
 
     public Fabrik() {

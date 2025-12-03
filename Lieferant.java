@@ -7,11 +7,13 @@ public class Lieferant {
                                                int benoetigteFarbe,
                                                int benoetigterKarton,
                                                int benoetigtesGlas) {
-        // Lieferung erfolgt sofort: Bestände im Lager erhöhen
-        if (benoetigtesHolz > 0) lager.addHolz(benoetigtesHolz);
-        if (benoetigteSchrauben > 0) lager.addSchrauben(benoetigteSchrauben);
-        if (benoetigteFarbe > 0) lager.addFarbe(benoetigteFarbe);
-        if (benoetigterKarton > 0) lager.addKarton(benoetigterKarton);
-        if (benoetigtesGlas > 0) lager.addGlas(benoetigtesGlas);
+        public void bestellungAufgebenFuerMaterial(Lager lager, int holz, int schrauben, int farbe, int karton, int glas) {
+            // Always act on the global Lager instance to avoid inconsistencies
+            Lager target = Lager.getInstance();
+            target.addHolz(holz);
+            target.addSchrauben(schrauben);
+            target.addFarbe(farbe);
+            target.addKarton(karton);
+            target.addGlas(glas);
     }
 }
