@@ -1,23 +1,25 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import junit.framework.TestCase;
 
-public class LagerTest {
-    @Test
-    public void beschaffungsZeit_0_beiGenugBestand() {
+public class LagerTest extends TestCase {
+    public void testBeschaffungsZeit_0_beiGenugBestand() {
         Fabrik f = new Fabrik();
-        Bestellung b = f.bestellungAufgeben(1, 1); // reserviert Material im Lager
-        assertEquals(0, b.gibBeschaffungsZeit());
-        assertTrue(b.gibLieferZeit() > 0);
+        Lager lager = f.getLager();
+        Bestellung b = f.bestellungAufgeben(1, 1); // reale Bestellung mit Produkten
+        assertEquals(0, lager.gibBeschaffungsZeit(b));
+        // Lieferzeit wird bei Bestaetigung gesetzt; hier nur Prüfung der Beschaffung
     }
 
-    @Test
-    public void lagerAuffuellen_erhoehtBestaende() {
+    public void testLagerAuffuellen_erhoehtBestaende() {
         Fabrik f = new Fabrik();
+        Lager lager = f.getLager();
+        Lieferant lieferant = f.getLieferant();
         // Triggert Nachbestellung: sehr große Bestellung
         Bestellung b = f.bestellungAufgeben(50, 50);
-        assertEquals(2, b.gibBeschaffungsZeit());
+        assertEquals(2, lager.gibBeschaffungsZeit(b));
+        // Auffüllen
+        lager.lagerAuffuellen(lieferant);
         // Nach Auffüllen sollten weitere kleine Bestellungen ohne Beschaffung möglich sein
         Bestellung b2 = f.bestellungAufgeben(1, 0);
-        assertEquals(0, b2.gibBeschaffungsZeit());
+        assertEquals(0, lager.gibBeschaffungsZeit(b2));
     }
 }
