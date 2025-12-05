@@ -1,16 +1,13 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import junit.framework.TestCase;
 
-public class ProduktTest {
+public class ProduktTest extends TestCase {
 
-    @Test
-    public void startZustand_istBestellt() {
+    public void testStartZustand_istBestellt() {
         Produkt p = new Standardtuer();
         assertEquals(0, p.aktuellerZustand());
     }
 
-    @Test
-    public void zustandWechsel_mehrereZustaende() {
+    public void testZustandWechsel_mehrereZustaende() {
         Produkt p = new Standardtuer();
 
         p.zustandAendern(2);
@@ -20,8 +17,7 @@ public class ProduktTest {
         assertEquals(4, p.aktuellerZustand());
     }
 
-    @Test
-    public void zustandAlsText_stimmt() {
+    public void testZustandAlsText_stimmt() {
         Produkt p = new Premiumtuer();
 
         p.zustandAendern(3);

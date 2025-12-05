@@ -1,32 +1,22 @@
- 
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import junit.framework.TestCase;
 
 /**
  * Tests für Fabrik.
  */
-public class FabrikTest {
-
-    @Test
-    public void bestellungAufgeben_legtmAb() {
+public class FabrikTest extends TestCase {
+    public void testBestellungAufgeben_legtmAb() {
         Fabrik f = new Fabrik();
         f.bestellungAufgeben(2, 1);
         assertEquals(1, f.anzahlBestellungen());
     }
-
-    @Test
-    public void bestellungenAusgeben_keineException() {
+    public void testBestellungenAusgeben_keineException() {
         Fabrik f = new Fabrik();
         f.bestellungAufgeben(1, 0);
         f.bestellungAufgeben(0, 1);
-        assertDoesNotThrow(() -> f.bestellungenAusgeben());
+        // BlueJ/JUnit3: Wir rufen einfach aus und erwarten keine Exception
+        f.bestellungenAusgeben();
     }
-
-    @Test
-    public void bestellungAufgeben_negativeWerte_werdenNichtGespeichert() {
+    public void testBestellungAufgeben_negativeWerte_werdenNichtGespeichert() {
         Fabrik f = new Fabrik();
         int vorher = f.anzahlBestellungen();
 
@@ -35,9 +25,7 @@ public class FabrikTest {
 
         assertEquals(vorher, f.anzahlBestellungen());
     }
-
-    @Test
-    public void bestellungAufgeben_nullNull_wirdNichtGespeichert() {
+    public void testBestellungAufgeben_nullNull_wirdNichtGespeichert() {
         Fabrik f = new Fabrik();
         int vorher = f.anzahlBestellungen();
 
@@ -45,9 +33,7 @@ public class FabrikTest {
 
         assertEquals(vorher, f.anzahlBestellungen());
     }
-
-    @Test
-    public void bestellungAufgeben_mehrereBestellungen_zaehltKorrekt() {
+    public void testBestellungAufgeben_mehrereBestellungen_zaehltKorrekt() {
         Fabrik f = new Fabrik();
 
         f.bestellungAufgeben(1, 0);
@@ -56,9 +42,7 @@ public class FabrikTest {
 
         assertEquals(3, f.anzahlBestellungen());
     }
-
-    @Test
-    public void bestellungAufgeben_inhaltDerBestellung_stimmt() {
+    public void testBestellungAufgeben_inhaltDerBestellung_stimmt() {
         Fabrik f = new Fabrik();
 
         f.bestellungAufgeben(2, 1);

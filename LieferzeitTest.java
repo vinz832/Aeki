@@ -1,9 +1,7 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import junit.framework.TestCase;
 
-public class LieferzeitTest {
-    @Test
-    public void lieferzeit_berechnung_ohneBeschaffung() {
+public class LieferzeitTest extends TestCase {
+    public void testLieferzeit_berechnung_ohneBeschaffung() {
         Fabrik f = new Fabrik();
         // 2 Standard (3 Tage je) + 1 Premium (5 Tage) = 11 Produktion
         Bestellung b = f.bestellungAufgeben(2, 1);
@@ -12,8 +10,7 @@ public class LieferzeitTest {
         assertEquals(expectedProd + 0 + 1, b.gibLieferZeit());
     }
 
-    @Test
-    public void lieferzeit_berechnung_mitBeschaffung() {
+    public void testLieferzeit_berechnung_mitBeschaffung() {
         Fabrik f = new Fabrik();
         Bestellung b = f.bestellungAufgeben(60, 60); // Zwingt Materialmangel
         int expectedProd = 60 * Standardtuer.PRODUKTIONSZEIT + 60 * Premiumtuer.PRODUKTIONSZEIT;
