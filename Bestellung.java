@@ -144,7 +144,7 @@ public class Bestellung {
 
     /**
      * Füllt das verknüpfte Lager über den in der Fabrik gehaltenen Lieferanten wieder auf.
-     * Diese BlueJ-freundliche Methode kommt ohne Parameter aus.
+     * 
      */
     public void lagerWiederAuffuellen() {
         if (fabrikReferenz != null) {

@@ -1,3 +1,26 @@
+
+/**
+ * Beschreiben Sie hier die Klasse Lager 
+	• Beinhaltet die Information zu den maximal lagerbaren Materialeinheiten
+		○ Diese Informationen sind in den Klassenvariablen MAXHOLZEINHEITEN, MAXSCHRAUBEN, MAXFARBEINHEITEN, MAXKARTONEINHEITEN und MAXGLASEINHEITEN gespeichert.
+	
+Neue Methode in der Klasse Lager:
+
+gibBeschaffungsZeit
+	• erhält als Parameter eine Kundenbestellung und liefert 0 Tage zurück, wenn alle Materialien für die Produktion aller bestellter Produkte vorhanden sind
+	• Tage, wenn das Material beim Lieferanten nachbestellt werden muss.
+	• Dafür muss die Liste mit allen Produkten der Bestellung durchsucht und die Anzahl benötigter Materialien ausgerechnet werden. 
+	
+lagerAuffuellen
+	• Diese Methode bestellt fehlende Produkte beim Lieferanten nach und füllt nach Erhalt das Lager wieder auf.
+
+lagerBestandAusgeben
+Diese Methode druckt die im Lager vorhandenen Materialeinheiten auf die Konsole aus.
+
+ * @author Owen, Matthieu, Alexander, Moacir, Vinzenz
+ * @version 05.12.2025
+ */
+
 import java.util.List;
 
 /**
