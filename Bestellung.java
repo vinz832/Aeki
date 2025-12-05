@@ -117,11 +117,40 @@ public class Bestellung {
         int standardZeit = this.anzahlStandardTueren * 3;
         int premiumZeit = this.anzahlPremiumTueren * 5;
         this.beschaffungsZeit = standardZeit + premiumZeit;
-    }    public void bestellungBestaetigen() {
+    }
+
+    /**
+     * Bestätigt die Bestellung. Dabei wird – falls eine Fabrik gesetzt ist –
+     * die Beschaffungszeit über das gemeinsame Lager geprüft und Material
+     * reserviert. Die ermittelte Beschaffungszeit und Lieferzeit werden
+     * gespeichert, sodass BlueJ ohne Parameterübergabe die Zeiten anzeigen kann.
+     */
+    public void bestellungBestaetigen() {
         this.bestellBestaetigung = true;
-        // Bei Bestaetigung Material reservieren und Zeiten setzen
         if (fabrikReferenz != null) {
-            fabrikReferenz.reserveMaterialFuer(this);
+            // Beschaffungszeit über das Lager berechnen und ggf. reservieren
+            Lager lager = fabrikReferenz.getLager();
+            int beschaffung = lager.gibBeschaffungsZeit(this);
+            this.setzeBeschaffungsZeit(beschaffung);
+
+            int produktionsZeit = gibAnzahlStandardTueren() * Standardtuer.PRODUKTIONSZEIT
+                                + gibAnzahlPremiumTueren() * Premiumtuer.PRODUKTIONSZEIT;
+            int lieferZeitBerechnet = produktionsZeit + beschaffung + 1;
+            this.setzeLieferZeit(lieferZeitBerechnet);
+        } else {
+            System.out.println("Hinweis: Keine Fabrik verknüpft – Zeiten wurden nicht anhand des Lagers berechnet.");
+        }
+    }
+
+    /**
+     * Füllt das verknüpfte Lager über den in der Fabrik gehaltenen Lieferanten wieder auf.
+     * Diese BlueJ-freundliche Methode kommt ohne Parameter aus.
+     */
+    public void lagerWiederAuffuellen() {
+        if (fabrikReferenz != null) {
+            fabrikReferenz.getLager().lagerAuffuellen(fabrikReferenz.getLieferant());
+        } else {
+            System.out.println("Hinweis: Keine Fabrik verknüpft – Lager kann nicht aufgefüllt werden.");
         }
     }
 
