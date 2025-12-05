@@ -47,6 +47,26 @@ public class Fabrik {
     }
 
     /**
+     * BlueJ-Helfer: Lager ohne Parameter auffüllen (nutzt den Fabrik-Lieferanten).
+     */
+    public void lagerAuffuellen() {
+        lager.lagerAuffuellen(lieferant);
+    }
+
+    /**
+     * BlueJ-Helfer: Erstellt eine Bestellung mit den angegebenen Mengen und
+     * prüft direkt die Beschaffungszeit im gemeinsamen Lager. Gibt den Wert zurück.
+     * Hinweis: Dabei wird Material reserviert, falls genug vorhanden ist.
+     */
+    public int pruefeBeschaffungsZeitFuer(int standardTueren, int premiumTueren) {
+        Bestellung b = bestellungAufgeben(standardTueren, premiumTueren);
+        if (b == null) {
+            return -1;
+        }
+        return lager.gibBeschaffungsZeit(b);
+    }
+
+    /**
      * Reserviert Material im globalen Lager und setzt Beschaffungszeit/Lieferzeit.
      * Wird beim Bestaetigen der Bestellung aufgerufen.
      */
