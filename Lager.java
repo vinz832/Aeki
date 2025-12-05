@@ -104,6 +104,44 @@ public class Lager {
     }
 
     /**
+     * Prüft die Beschaffungszeit, ohne Material zu reservieren.
+     * @return 0 wenn genug Material vorhanden, sonst 2
+     */
+    public int pruefeBeschaffungsZeitOhneReservierung(Bestellung bestellung) {
+        List<Produkt> produkte = bestellung.gibProdukte();
+
+        int bedarfHolz = 0;
+        int bedarfSchrauben = 0;
+        int bedarfFarbe = 0;
+        int bedarfKarton = 0;
+        int bedarfGlas = 0;
+
+        for (Produkt p : produkte) {
+            if (p instanceof Standardtuer) {
+                bedarfHolz += Standardtuer.gibHolzeinheiten();
+                bedarfSchrauben += Standardtuer.gibSchrauben();
+                bedarfFarbe += Standardtuer.FARBEINHEITEN;
+                bedarfKarton += Standardtuer.KARTONEINHEITEN;
+            } else if (p instanceof Premiumtuer) {
+                bedarfHolz += Premiumtuer.gibHolzeinheiten();
+                bedarfSchrauben += Premiumtuer.gibSchrauben();
+                bedarfFarbe += Premiumtuer.FARBEINHEITEN;
+                bedarfKarton += Premiumtuer.KARTONEINHEITEN;
+                bedarfGlas += Premiumtuer.gibGlaseinheiten();
+            }
+        }
+
+        boolean genugMaterial =
+            bedarfHolz <= holz &&
+            bedarfSchrauben <= schrauben &&
+            bedarfFarbe <= farbe &&
+            bedarfKarton <= karton &&
+            bedarfGlas <= glas;
+
+        return genugMaterial ? 0 : 2;
+    }
+
+    /**
      * Füllt das Lager durch Bestellung beim Lieferanten wieder auf.
      */
     public void lagerAuffuellen(Lieferant lieferant) {

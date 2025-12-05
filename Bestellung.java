@@ -133,6 +133,17 @@ public class Bestellung {
     }
 
     /**
+     * BlueJ-Helfer: Prüft die Beschaffungszeit ohne Lagerbestände zu verändern
+     * und gibt das Ergebnis auf der Konsole aus. Speichert den Wert ebenfalls.
+     */
+    public void zeigeBeschaffungsZeitOhneReservierung() {
+        Lager lager = (fabrikReferenz != null) ? fabrikReferenz.getLager() : Lager.getInstance();
+        int zeit = lager.pruefeBeschaffungsZeitOhneReservierung(this);
+        this.setzeBeschaffungsZeit(zeit);
+        System.out.println("Beschaffungszeit (ohne Reservierung): " + zeit + " Tag(e)");
+    }
+
+    /**
      * Bestätigt die Bestellung. Dabei wird – falls eine Fabrik gesetzt ist –
      * die Beschaffungszeit über das gemeinsame Lager geprüft und Material
      * reserviert. Die ermittelte Beschaffungszeit und Lieferzeit werden
