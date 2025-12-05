@@ -112,11 +112,24 @@ public class Bestellung {
             bestellteProdukte.add(new Premiumtuer());
         }
 
-        // Beschaffungszeit automatisch berechnen
-        // Standardtuer: 3 Tage, Premiumtuer: 5 Tage
-        int standardZeit = this.anzahlStandardTueren * 3;
-        int premiumZeit = this.anzahlPremiumTueren * 5;
-        this.beschaffungsZeit = standardZeit + premiumZeit;
+        // Beschaffungs- und Lieferzeit werden NICHT mehr im Konstruktor berechnet.
+        // Die Ermittlung erfolgt BlueJ-freundlich ohne Eingaben über eigene Methoden
+        // (z. B. bestellungBestaetigen() oder zeigeBeschaffungsZeit()).
+        this.beschaffungsZeit = 0;
+        this.lieferZeit = 0;
+    }
+
+    /**
+     * BlueJ-Helfer: Ermittelt ohne weitere Eingaben die Beschaffungszeit
+     * über das verbundene Lager und gibt sie auf der Konsole aus.
+     * Außerdem wird die ermittelte Zeit in dieser Bestellung gespeichert.
+     * Wenn keine Fabrik verknüpft ist, wird das globale Lager verwendet.
+     */
+    public void zeigeBeschaffungsZeit() {
+        Lager lager = (fabrikReferenz != null) ? fabrikReferenz.getLager() : Lager.getInstance();
+        int zeit = lager.gibBeschaffungsZeit(this);
+        this.setzeBeschaffungsZeit(zeit);
+        System.out.println("Beschaffungszeit: " + zeit + " Tag(e)");
     }
 
     /**
