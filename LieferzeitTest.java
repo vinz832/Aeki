@@ -12,8 +12,10 @@ public class LieferzeitTest extends TestCase {
 
     public void testLieferzeit_berechnung_mitBeschaffung() {
         Fabrik f = new Fabrik();
-        Bestellung b = f.bestellungAufgeben(60, 60); // Zwingt Materialmangel
+        Bestellung b = f.bestellungAufgeben(60, 60); // große Bestellung, Material knapp
         int expectedProd = 60 * Standardtuer.PRODUKTIONSZEIT + 60 * Premiumtuer.PRODUKTIONSZEIT;
+        // Zeiten werden erst beim Bestätigen über das Lager berechnet und gesetzt
+        b.bestellungBestaetigen();
         assertEquals(2, b.gibBeschaffungsZeit());
         assertEquals(expectedProd + 2 + 1, b.gibLieferZeit());
     }
