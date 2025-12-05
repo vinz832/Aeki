@@ -120,16 +120,17 @@ public class Bestellung {
     }
 
     /**
-     * BlueJ-Helfer: Ermittelt ohne weitere Eingaben die Beschaffungszeit
-     * über das verbundene Lager und gibt sie auf der Konsole aus.
+     * BlueJ-Helfer (mit Reservierung): Ermittelt ohne weitere Eingaben die
+     * Beschaffungszeit über das verbundene Lager, reserviert dabei Material
+     * (falls ausreichend vorhanden) und gibt das Ergebnis auf der Konsole aus.
      * Außerdem wird die ermittelte Zeit in dieser Bestellung gespeichert.
      * Wenn keine Fabrik verknüpft ist, wird das globale Lager verwendet.
      */
-    public void zeigeBeschaffungsZeit() {
+    public void zeigeBeschaffungsZeitMitReservierung() {
         Lager lager = (fabrikReferenz != null) ? fabrikReferenz.getLager() : Lager.getInstance();
         int zeit = lager.gibBeschaffungsZeit(this);
         this.setzeBeschaffungsZeit(zeit);
-        System.out.println("Beschaffungszeit: " + zeit + " Tag(e)");
+        System.out.println("Beschaffungszeit (mit Reservierung): " + zeit + " Tag(e)");
     }
 
     /**
