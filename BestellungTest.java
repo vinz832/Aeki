@@ -22,4 +22,45 @@ public class BestellungTest extends TestCase {
         assertEquals(5, b.gibBestellungsNr());
         assertEquals(5, b.gibProdukte().size());
     }
+
+    public void testLieferzeitSetzenUndLesen() {
+        Bestellung b = new Bestellung(7, 1, 0);
+        b.setzeLieferZeit(4);
+        assertEquals(4, b.gibLieferZeit());
+    }
+
+    public void testBestellungBestaetigenBerechnetZeitenMitFabrik() {
+        Fabrik f = new Fabrik();
+        Bestellung b = f.bestellungAufgeben(1, 1); // Fabrik setzt Referenz
+        assertNotNull(b);
+        assertEquals(0, b.gibBeschaffungsZeit()); // vorläufig
+
+        b.bestellungBestaetigen();
+        assertTrue(b.gibBestellBestaetigung());
+        // Kleine Bestellung sollte bei vollem Lager Beschaffungszeit 0 liefern
+        assertEquals(0, b.gibBeschaffungsZeit());
+        int erwarteteProduktion = 1 * Standardtuer.PRODUKTIONSZEIT + 1 * Premiumtuer.PRODUKTIONSZEIT;
+        assertEquals(erwarteteProduktion + 0 + 1, b.gibLieferZeit());
+    }
+
+    public void testLagerWiederAuffuellenOhneParameter() {
+        Fabrik f = new Fabrik();
+        Lager lager = f.getLager();
+        Bestellung bGross = f.bestellungAufgeben(50, 50);
+        assertNotNull(bGross);
+        // Erzwinge Beschaffungszeit 2 (Material fehlt)
+        int besch2 = lager.gibBeschaffungsZeit(bGross);
+        assertEquals(2, besch2);
+
+        // Fülle Lager über Bestellung-Helfer wieder auf (ohne Parameter)
+        Bestellung anzeige = new Bestellung();
+        anzeige.setztFabrik(f);
+        anzeige.lagerWiederAuffuellen();
+
+        // Kleine Bestellung sollte wieder mit 0 durchgehen
+        Bestellung bKlein = f.bestellungAufgeben(1, 0);
+        assertNotNull(bKlein);
+        int besch0 = lager.gibBeschaffungsZeit(bKlein);
+        assertEquals(0, besch0);
+    }
 }

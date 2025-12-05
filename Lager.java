@@ -131,4 +131,29 @@ public class Lager {
         System.out.println("Glas: " + glas);
         System.out.println();
     }
+
+    /**
+     * BlueJ-Helfer: Berechnet die Beschaffungszeit direkt aus dem Lager,
+     * ohne dass eine Bestellung übergeben werden muss.
+     * Es wird intern eine temporäre Bestellung erzeugt und die vorhandene
+     * Methode gibBeschaffungsZeit(...) genutzt. Bei genügend Material
+     * wird Material auch reserviert.
+     * @param standardTueren Anzahl Standardtüren
+     * @param premiumTueren Anzahl Premiumtüren
+     * @return 0 bei genügend Material, sonst 2
+     */
+    public int gibBeschaffungsZeitFuer(int standardTueren, int premiumTueren) {
+        int tmpId = IdGenerator.nextOrderId();
+        Bestellung tmp = new Bestellung(tmpId, standardTueren, premiumTueren);
+        return gibBeschaffungsZeit(tmp);
+    }
+
+    /**
+     * BlueJ-Helfer: Füllt das Lager ohne Parameter wieder auf.
+     * Intern wird ein Lieferant erzeugt und die vorhandene Auffülllogik verwendet.
+     */
+    public void lagerAuffuellenOhneParameter() {
+        Lieferant lieferant = new Lieferant();
+        lagerAuffuellen(lieferant);
+    }
 }
