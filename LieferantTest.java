@@ -1,10 +1,7 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import junit.framework.TestCase;
 
-public class LieferantTest {
-
-    @Test
-    void lieferantFuellteLagerAuf() {
+public class LieferantTest extends TestCase {
+    public void testLieferantFuellteLagerAuf() {
         Fabrik f = new Fabrik();
         Lager lager = f.getLager();
         Lieferant lieferant = f.getLieferant();
