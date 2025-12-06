@@ -23,4 +23,10 @@ public class ProduktTest extends TestCase {
         p.zustandAendern(3);
         assertEquals("TRANSPORTVORBEREITUNG", p.zustandAlsText());
     }
+    public void testZustandAlsTextStartzustand()
+{
+    Produkt p = new Standardtuer(); // oder new Premiumtuer() – beide starten bei Zustand 0
+    
+    assertEquals("BESTELLT", p.zustandAlsText());
+}
 }

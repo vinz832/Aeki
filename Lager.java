@@ -1,30 +1,32 @@
 
 /**
  * Beschreiben Sie hier die Klasse Lager 
-	• Beinhaltet die Information zu den maximal lagerbaren Materialeinheiten
-		○ Diese Informationen sind in den Klassenvariablen MAXHOLZEINHEITEN, MAXSCHRAUBEN, MAXFARBEINHEITEN, MAXKARTONEINHEITEN und MAXGLASEINHEITEN gespeichert.
-	
+    • Beinhaltet die Information zu den maximal lagerbaren Materialeinheiten
+        ○ Diese Informationen sind in den Klassenvariablen MAXHOLZEINHEITEN, MAXSCHRAUBEN, MAXFARBEINHEITEN, MAXKARTONEINHEITEN und MAXGLASEINHEITEN gespeichert.
+    
 Neue Methode in der Klasse Lager:
 
 gibBeschaffungsZeit
-	• erhält als Parameter eine Kundenbestellung und liefert 0 Tage zurück, wenn alle Materialien für die Produktion aller bestellter Produkte vorhanden sind
-	• Tage, wenn das Material beim Lieferanten nachbestellt werden muss.
-	• Dafür muss die Liste mit allen Produkten der Bestellung durchsucht und die Anzahl benötigter Materialien ausgerechnet werden. 
-	
+    • erhält als Parameter eine Kundenbestellung und liefert 0 Tage zurück, wenn alle Materialien für die Produktion aller bestellter Produkte vorhanden sind
+    • Tage, wenn das Material beim Lieferanten nachbestellt werden muss.
+    • Dafür muss die Liste mit allen Produkten der Bestellung durchsucht und die Anzahl benötigter Materialien ausgerechnet werden. 
+    
 lagerAuffuellen
-	• Diese Methode bestellt fehlende Produkte beim Lieferanten nach und füllt nach Erhalt das Lager wieder auf.
+    • Diese Methode bestellt fehlende Produkte beim Lieferanten nach und füllt nach Erhalt das Lager wieder auf.
 
 lagerBestandAusgeben
 Diese Methode druckt die im Lager vorhandenen Materialeinheiten auf die Konsole aus.
 
  * @author Owen, Matthieu, Alexander, Moacir, Vinzenz
- * @version 05.12.2025
+ * @version 08.12.2025
  */
 
 import java.util.List;
 
 /**
  * Lager verwaltet Materialbestände und ermittelt Beschaffungszeiten.
+ * Es handelt sich um eine zentrale Instanz, die von der Fabrik für alle
+ * Bestellungen genutzt wird.
  */
 public class Lager {
     // Singleton instance to ensure a single global stock source
@@ -40,7 +42,12 @@ public class Lager {
     private int farbe;
     private int karton;
     private int glas;
+    
     // Private constructor initializes the stock to max values
+       /**
+     * Privater Konstruktor: initialisiert das Lager mit maximalen Anfangsbeständen.
+     * Dies unterstützt das Singleton-Muster.
+     */
     private Lager() {
         holz = MAXHOLZEINHEITEN;
         schrauben = MAXSCHRAUBEN;
@@ -49,7 +56,12 @@ public class Lager {
         glas = MAXGLASEINHEITEN;
     }
 
-    // Global accessor: always use this to get the shared Lager
+  
+     
+    /**
+     * Liefert die Singleton-Instanz des Lagers.
+     * @return globale Lagerinstanz
+     */
     public static Lager getInstance() {
         return INSTANCE;
     }
@@ -193,5 +205,24 @@ public class Lager {
     public void lagerAuffuellenOhneParameter() {
         Lieferant lieferant = new Lieferant();
         lagerAuffuellen(lieferant);
+    }
+    public int gibHolz() {
+        return holz;
+    }
+
+    public int gibSchrauben() {
+        return schrauben;
+    }
+
+    public int gibFarbe() {
+        return farbe;
+    }
+
+    public int gibKarton() {
+        return karton;
+    }
+
+    public int gibGlas() {
+        return glas;
     }
 }

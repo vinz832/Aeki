@@ -1,5 +1,4 @@
-//moacir
-//Alex
+//Aktuelle Version 6.12 16:19
 /**
  * Beschreiben Sie hier die Klasse Fabrik.
  * 
@@ -8,7 +7,7 @@
     • enthält die Methode main, die den Einstieg in das Programm ermöglicht
 
  * @author Moacir, Owen, Mathieu, Alexander, Vinzenz
- * @version (23.11.2025)
+ * @version (8.12.2025)
  */
  
 
@@ -130,12 +129,18 @@ public class Fabrik {
         int id = IdGenerator.nextOrderId();
         Bestellung b = new Bestellung(id, standardTueren, premiumTueren, this);
 
-        // Vorläufige Lieferzeit ohne Materialreservierung (wird bei Bestaetigung gesetzt)
-        int produktionsZeit = standardTueren * Standardtuer.PRODUKTIONSZEIT
-                            + premiumTueren * Premiumtuer.PRODUKTIONSZEIT;
-        b.setzeBeschaffungsZeit(0);
-        b.setzeLieferZeit(produktionsZeit + 1);
+        // Beschaffungszeit über das Lager prüfen (ohne Reservierung)
+        int beschaffungsZeit = lager.pruefeBeschaffungsZeitOhneReservierung(b);
 
+        // Produktionszeit berechnen
+        int produktionsZeit = standardTueren * Standardtuer.PRODUKTIONSZEIT
+                    + premiumTueren * Premiumtuer.PRODUKTIONSZEIT;
+
+        // Beschaffungs- und Lieferzeit in der Bestellung speichern
+        b.setzeBeschaffungsZeit(beschaffungsZeit);
+        b.setzeLieferZeit(produktionsZeit + beschaffungsZeit + 1);
+
+        // Bestellung speichern & ausgeben
         bestellungen.add(b);
         System.out.println(b.toString());
         return b;
@@ -153,6 +158,7 @@ public class Fabrik {
             System.out.println("Lieferzeit: " + b.gibLieferZeit() + " Tag(e)");
         }
     }
+  
 
     // Hilfsmethode für Tests: Anzahl Bestellungen
     //Liefer die Anzahl aller bisher aufgegebenen Bestellungen dieser Fabrik

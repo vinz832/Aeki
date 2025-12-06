@@ -54,4 +54,12 @@ public class FabrikTest extends TestCase {
         assertEquals(1, b.gibAnzahlPremiumTueren());
         assertEquals(3, b.gibProdukte().size());
     }
+    public void testBestellungAufgeben_setztZeiten() {
+    Fabrik f = new Fabrik();
+    Bestellung b = f.bestellungAufgeben(2, 1);
+    int expectedProd = 2 * Standardtuer.PRODUKTIONSZEIT 
+                     + 1 * Premiumtuer.PRODUKTIONSZEIT;
+    assertEquals(0, b.gibBeschaffungsZeit());
+    assertEquals(expectedProd + 1, b.gibLieferZeit());
+}
 }

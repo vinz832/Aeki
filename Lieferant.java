@@ -5,7 +5,7 @@
  * Lieferant liefert Material synchron an das Lager.
 
  * @author Owen, Mathieu, Alexander, Moacir, Vinzenz
- * @version 23.11.2025
+ * @version 8.12.2025
  * */
 public class Lieferant {
     public void bestellungAufgebenFuerMaterial(Lager lager,

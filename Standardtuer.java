@@ -16,7 +16,7 @@
         ○ Verwendeter Lack 
 Auch die Methoden, um auf diese Information zuzugreifen, gehören der Klasse an und nicht den einzelnen Instanzen.
  * @author  Moacir, Owen, Alexander, Mathieu, Vinzenz
- * @version 23.11.2025
+ * @version 8.12.2025
 
 
  */

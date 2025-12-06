@@ -63,4 +63,24 @@ public class BestellungTest extends TestCase {
         int besch0 = lager.gibBeschaffungsZeit(bKlein);
         assertEquals(0, besch0);
     }
+    public void testBestellungBestaetigen_setztZeitenKorrekt()
+{
+    Fabrik f = new Fabrik();
+    
+    // Große Bestellung → Lager hat nicht genug → Beschaffungszeit = 2
+    Bestellung b = f.bestellungAufgeben(100, 100);
+
+    // Bestellung bestätigen → jetzt wird die echte Beschaffungszeit & Lieferzeit gesetzt
+    b.bestellungBestaetigen();
+    
+    int expectedBeschaffung = 2; // Weil Material fehlt
+    int expectedProd = 100 * Standardtuer.PRODUKTIONSZEIT
+                     + 100 * Premiumtuer.PRODUKTIONSZEIT;
+    int expectedLieferzeit = expectedProd + expectedBeschaffung + 1;
+
+    assertTrue(b.gibBestellBestaetigung());
+    assertEquals(expectedBeschaffung, b.gibBeschaffungsZeit());
+    assertEquals(expectedLieferzeit, b.gibLieferZeit());
+}
+ 
 }

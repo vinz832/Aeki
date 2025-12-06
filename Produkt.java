@@ -5,7 +5,7 @@
  * Abstrakte Basisklasse fuer Produkte.
 
  * @author Owen, Mathieu, Alexander, Moacir, Vinzenz
- * @version 23.11.2025
+ * @version 8.12.2025
  */
 public abstract class Produkt {
     /**
