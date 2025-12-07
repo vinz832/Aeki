@@ -1,3 +1,12 @@
+/**
+ * 
+ *   Test für die Berechnung der Beschaffungszeit
+ *   -> In Abhängigkeit vom Materialbedarf einer Bestellung.
+
+ * @author Owen, Matthieu, Alexander, Moacir, Vinzenz
+ * @version 8.12.2025
+ * */
+
 import junit.framework.TestCase;
 
 public class BeschaffungsZeitTest extends TestCase {

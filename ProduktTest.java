@@ -1,3 +1,14 @@
+/**
+ * /**
+ *  
+ * Überprüft Startzustand, Zustandswechsel und korrekte Textausgabe der Zustände von Produkt-Objekten.
+.
+
+ * @author Owen, Matthieu, Alexander, Moacir, Vinzenz
+ * @version 8.12.2025
+ * */
+
+
 import junit.framework.TestCase;
 
 public class ProduktTest extends TestCase {

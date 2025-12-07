@@ -1,3 +1,12 @@
+/**
+ * Tests für Funktionen der Fabrik: 
+ * -> Bestellfunktionen (Aufgeben, Ausgeben)
+ * -> Validierung
+ * -> Summierung
+ * -> Korrekte Initialisierung
+ * 
+*/ 
+
 import junit.framework.TestCase;
 
 /**

@@ -1,15 +1,13 @@
 
 /**
- * Beschreiben Sie hier die Klasse StandardUndPremiumTuerTest.
- * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
- */
+ 
+ * * Tests für die Materialbedarfs-Methoden von Standardtuer und Premiumtuer.
+
+ * @author Owen, Matthieu, Alexander, Moacir, Vinzenz
+ * @version 8.12.2025
+ * */
 import junit.framework.TestCase;
 
-/**
- * Tests für die Materialbedarfs-Methoden von Standardtuer und Premiumtuer.
- */
 public class StandardUndPremiumTuerTest extends TestCase
 {
     public void testMaterialbedarfStandardtuer()

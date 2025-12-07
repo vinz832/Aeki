@@ -1,3 +1,16 @@
+/**
+ * 
+ *   Test für grundlegende Funktionen der Klasse Bestellung:
+ *   -> Erstellung
+ *   -> Zustandsänderungen
+ *   -> Zeitberechnung
+ *   -> Interaktion mit der Fabrik.
+
+
+ * @author Owen, Matthieu, Alexander, Moacir, Vinzenz
+ * @version 8.12.2025
+ * */
+
 import junit.framework.TestCase;
 
 public class BestellungTest extends TestCase {

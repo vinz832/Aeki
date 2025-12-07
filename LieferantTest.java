@@ -1,3 +1,11 @@
+/**
+ * 
+ *   Test für Zusammenspiel von Lager, Lieferant und Bestellungen.
+
+ * @author Owen, Matthieu, Alexander, Moacir, Vinzenz
+ * @version 8.12.2025
+ * */
+
 import junit.framework.TestCase;
 
 public class LieferantTest extends TestCase {
