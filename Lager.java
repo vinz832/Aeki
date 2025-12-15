@@ -71,7 +71,7 @@ public class Lager {
      * Optional: reserviert Material aus dem Lager.
      * @return 0 wenn genug Material vorhanden, sonst 2
      */
-    public int gibBeschaffungsZeit(Bestellung bestellung) {
+    public synchronized int gibBeschaffungsZeit(Bestellung bestellung) {
         List<Produkt> produkte = bestellung.gibProdukte();
 
         int bedarfHolz = 0;
@@ -119,7 +119,7 @@ public class Lager {
      * Prüft die Beschaffungszeit, ohne Material zu reservieren.
      * @return 0 wenn genug Material vorhanden, sonst 2
      */
-    public int pruefeBeschaffungsZeitOhneReservierung(Bestellung bestellung) {
+    public synchronized int pruefeBeschaffungsZeitOhneReservierung(Bestellung bestellung) {
         List<Produkt> produkte = bestellung.gibProdukte();
 
         int bedarfHolz = 0;
@@ -156,7 +156,7 @@ public class Lager {
     /**
      * Füllt das Lager durch Bestellung beim Lieferanten wieder auf.
      */
-    public void lagerAuffuellen(Lieferant lieferant) {
+    public synchronized void lagerAuffuellen(Lieferant lieferant) {
         lieferant.bestellungAufgebenFuerMaterial(this,
             MAXHOLZEINHEITEN - holz,
             MAXSCHRAUBEN - schrauben,
@@ -166,11 +166,11 @@ public class Lager {
     }
 
     /** Wird vom Lieferanten benutzt, um Bestände zu erhöhen. */
-    void addHolz(int menge) { holz = Math.min(MAXHOLZEINHEITEN, holz + menge); }
-    void addSchrauben(int menge) { schrauben = Math.min(MAXSCHRAUBEN, schrauben + menge); }
-    void addFarbe(int menge) { farbe = Math.min(MAXFARBEINHEITEN, farbe + menge); }
-    void addKarton(int menge) { karton = Math.min(MAXKARTONEINHEITEN, karton + menge); }
-    void addGlas(int menge) { glas = Math.min(MAXGLASEINHEITEN, glas + menge); }
+    synchronized void addHolz(int menge) { holz = Math.min(MAXHOLZEINHEITEN, holz + menge); }
+    synchronized void addSchrauben(int menge) { schrauben = Math.min(MAXSCHRAUBEN, schrauben + menge); }
+    synchronized void addFarbe(int menge) { farbe = Math.min(MAXFARBEINHEITEN, farbe + menge); }
+    synchronized void addKarton(int menge) { karton = Math.min(MAXKARTONEINHEITEN, karton + menge); }
+    synchronized void addGlas(int menge) { glas = Math.min(MAXGLASEINHEITEN, glas + menge); }
 
     public void lagerBestandAusgeben() {
         System.out.println("=== Lagerbestand ===");

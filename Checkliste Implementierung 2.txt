@@ -1,0 +1,60 @@
+Checkliste Implementierung 2
+
+Neue Elemente
+
+Bestellbestätigung
+•	Zu Jeder Bestellung muss nun eine Auftragsbestellung erfolgen. 
+•	Vor der Rücksendung einer Auftragsbestätigung prüft die Fabrik mit dem Lager, ob ausreichende Lagerbestände für die Fertigung der Bestellung vorhanden sind
+•	(Wir gehen in unserem Programm von einem Make-To-Order-Vorgang aus)
+ 
+Lagerbestände
+•	Bei geringen Lagerbeständen veranschlagt die Auftragsbestätigung zwei Tage zusätzlich zur Standardlieferzeit, welche Sie mit einem Tag festlegen können.
+•	Die Lieferzeit errechnet sich durch die Produktionszeit der bestellten Türen plus die Beschaffungszeit der notwendigen Materialien plus die Standardlieferzeit.
+•	Wenn die Bestände niedrig sind, sollte das Lager eine Bestellung beim Lieferanten aufgeben können.
+ 
+Neue Klassen:
+
+Implementieren Sie die Klasse Lager und die Klasse Lieferant.
+ 
+Lager 
+•	Beinhaltet die Information zu den maximal lagerbaren Materialeinheiten
+o	Diese Informationen sind in den Klassenvariablen MAXHOLZEINHEITEN, MAXSCHRAUBEN, MAXFARBEINHEITEN, MAXKARTONEINHEITEN und MAXGLASEINHEITEN gespeichert.
+ 
+Neue Methode in der Klasse Lager:
+ 
+
+gibBeschaffungsZeit
+•	erhält als Parameter eine Kundenbestellung und liefert 0 Tage zurück, wenn alle Materialien für die Produktion aller bestellter Produkte vorhanden sind
+•	2 Tage, wenn das Material beim Lieferanten nachbestellt werden muss.
+•	Dafür muss die Liste mit allen Produkten der Bestellung durchsucht und die Anzahl benötigter Materialien ausgerechnet werden. 
+•	Für die Berechnung müssen Sie wissen, ob es sich um eine Standardtür oder um eine Premiumtür handelt. Mit folgender Abfrage können Sie dies erfahren:
+if(produkt instanceof Standardtuer){
+….
+}else if(produkt instanceof Premiumtuer){
+….
+}
+Die Variable produkt ist vom Typ Produkt.
+ 
+lagerAuffuellen
+•	Diese Methode bestellt fehlende Produkte beim Lieferanten nach und füllt nach Erhalt das Lager wieder auf.
+ 
+lagerBestandAusgeben
+•	Diese Methode druckt die im Lager vorhandenen Materialeinheiten auf die Konsole aus.
+
+Klasse Lieferant: 
+•	Die Klasse Lieferant besitzt nur eine Methode, welche der Fabrik ermöglicht, eine Bestellung aufzugeben.
+
+ 
+Anpassungen in den bestehenden Klassen 
+ 
+
+Klasse Bestellung: 
+•	Zu jeder Instanz  muss auch die korrekte Beschaffungszeit und die entsprechende Lieferzeit gesetzt werden können. 
+•	Eine Methode, welche die Liste mit allen bestellten Produkten einer Bestellung retourniert, wird auch in der Klasse Bestellung benötigt.
+ 
+Klasse Fabrik: 
+•	Es ändert sich die Methode bestellungAufgeben, indem die Beschaffungszeit und die Lieferzeit errechnet und in der jeweiligen Bestellung gespeichert werden müssen
+•	Irgendwann muss auch das Lager wieder aufgefüllt werden.
+ 
+ 
+Erweiterung der Tests

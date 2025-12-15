@@ -71,4 +71,40 @@ public class FabrikTest extends TestCase {
     assertEquals(0, b.gibBeschaffungsZeit());
     assertEquals(expectedProd + 1, b.gibLieferZeit());
 }
+
+    /**
+     * Verifiziert, dass Lieferungen asynchron nach 48 Sekunden eintreffen.
+     * Vorgehen:
+     * 1) Eine kleine Bestellung reserviert Material und reduziert den Bestand.
+     * 2) Eine sehr große Bestellung triggert den Lieferanten (Auffüllen nach 48s).
+     * 3) Vor Ablauf der Zeit bleibt der Bestand unverändert, danach ist er aufgefüllt.
+     */
+    public void testVerzoegerteLieferung_nach48Sek() throws Exception {
+        Fabrik f = new Fabrik();
+        Lager lager = f.getLager();
+
+        // Delta berechnen (wie viel die kleine Bestellung verbraucht)
+        int deltaHolz = Standardtuer.HOLZEINHEITEN + Premiumtuer.HOLZEINHEITEN;
+        int deltaSchrauben = Standardtuer.SCHRAUBEN + Premiumtuer.SCHRAUBEN;
+
+        // 1) Kleine Bestellung: reserviert sofort und reduziert Lager
+        Bestellung klein = f.bestellungAufgeben(1, 1);
+        f.reserveMaterialFuer(klein);
+        int holzNachReservierung = lager.gibHolz();
+        int schraubenNachReservierung = lager.gibSchrauben();
+
+        // 2) Große Bestellung: löst Beschaffungszeit = 2 aus und startet Lieferanten-Thread
+        Bestellung gross = f.bestellungAufgeben(10_000, 10_000);
+        f.reserveMaterialFuer(gross);
+
+        // 3a) Vor Ablauf der 48s (z. B. nach 10s) muss Bestand unverändert bleiben
+        Thread.sleep(10_000L);
+        assertEquals(holzNachReservierung, lager.gibHolz());
+        assertEquals(schraubenNachReservierung, lager.gibSchrauben());
+
+        // 3b) Nach Ablauf der Zeit (+ kleine Puffer) muss aufgefüllt sein
+        Thread.sleep(40_000L + 1_500L);
+        assertEquals(holzNachReservierung + deltaHolz, lager.gibHolz());
+        assertEquals(schraubenNachReservierung + deltaSchrauben, lager.gibSchrauben());
+    }
 }
