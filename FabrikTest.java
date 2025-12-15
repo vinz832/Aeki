@@ -107,4 +107,33 @@ public class FabrikTest extends TestCase {
         assertEquals(holzNachReservierung + deltaHolz, lager.gibHolz());
         assertEquals(schraubenNachReservierung + deltaSchrauben, lager.gibSchrauben());
     }
+
+    /**
+     * Verifiziert, dass eine Bestellung durch den Produktions_Manager mit dem
+     * Holzbearbeitungs_Roboter letztlich abgeschlossen wird. Die Zeitskalierung
+     * wird reduziert, um die Laufzeit im Test kurz zu halten.
+     */
+    public void testProduktionWirdAbgeschlossen_mitTimeScaling() throws Exception {
+        String vorher = System.getProperty("aeki.time.scale");
+        System.setProperty("aeki.time.scale", "0.001"); // 1000x schneller
+        try {
+            Fabrik f = new Fabrik();
+            Bestellung b = f.bestellungAufgeben(1, 1);
+            assertNotNull(b);
+
+            long deadline = System.currentTimeMillis() + 7000L; // bis zu 7s warten
+            boolean fertig = false;
+            while (System.currentTimeMillis() < deadline) {
+                if (b.gibAbgeschlossen()) { fertig = true; break; }
+                Thread.sleep(100L);
+            }
+            assertTrue("Bestellung wurde nicht abgeschlossen", fertig);
+        } finally {
+            if (vorher != null) {
+                System.setProperty("aeki.time.scale", vorher);
+            } else {
+                System.clearProperty("aeki.time.scale");
+            }
+        }
+    }
 }

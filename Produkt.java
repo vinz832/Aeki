@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.List;
+
 
 /**
  * Beschreiben Sie hier die Klasse Produkt.
@@ -8,6 +11,8 @@
  * @version 8.12.2025
  */
 public abstract class Produkt {
+    // Produktionsstationen/Roboter, denen dieses Produkt zugeordnet wird
+    private LinkedList<Roboter> produktionsStationen = new LinkedList<Roboter>();
     /**
      * Zustandswerte:
      * 0 = BESTELLT
@@ -52,5 +57,42 @@ public abstract class Produkt {
             case 4: return "VERSAND";
             default: return "UNBEKANNT";
         }
+    }
+    /**
+     * Fügt eine Produktionsstation (Roboter) zur Bearbeitungsliste hinzu.
+     */
+    public void produktionsStationHinzufuegen(Roboter roboter) {
+        if (roboter == null) {
+            System.out.println("Hinweis: Null-Roboter wird ignoriert.");
+            return;
+        }
+        produktionsStationen.addLast(roboter);
+    }
+
+    /**
+     * Liefert die aktuelle Liste der zugewiesenen Produktionsstationen.
+     */
+    public List<Roboter> gibProduktionsStationen() {
+        return produktionsStationen;
+    }
+    /**
+     * Leitet das Produkt an die nächste Produktionsstation weiter.
+     * Nimmt den nächsten Roboter aus der Liste und uebergibt dieses Produkt
+     * an dessen Warteschlange.
+     * @return true, wenn ein Roboter gefunden wurde; sonst false
+     */
+    public boolean naechsteProduktionsStation() {
+        if (produktionsStationen.isEmpty()) {
+            System.out.println("Keine weitere Produktionsstation vorhanden.");
+            return false;
+        }
+        Roboter rob = produktionsStationen.pollFirst();
+        if (rob == null) {
+            System.out.println("Unerwartet: Roboter war null.");
+            return false;
+        }
+        System.out.println("Produkt an Roboter uebergeben: " + rob.getClass().getSimpleName());
+        rob.fuegeProduktHinzu(this);
+        return true;
     }
 }

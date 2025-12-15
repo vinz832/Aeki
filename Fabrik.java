@@ -26,9 +26,15 @@ public class Fabrik {
     // Globales, gemeinsames Lager und Lieferant für alle Fabrik-Instanzen
     private static final Lager lager = Lager.getInstance();
     private static final Lieferant lieferant = new Lieferant();
+    // Ein Produktionsmanager pro Fabrik
+    private final Produktions_Manager produktionsManager;
 
     public Fabrik() {
         bestellungen = new ArrayList<>();
+        // Produktionsmanager starten (als Daemon, blockiert JVM-Ende nicht)
+        produktionsManager = new Produktions_Manager();
+        produktionsManager.setDaemon(true);
+        produktionsManager.start();
     }
 
     /**
@@ -143,6 +149,10 @@ public class Fabrik {
         // Bestellung speichern & ausgeben
         bestellungen.add(b);
         System.out.println(b.toString());
+
+        // Bestellung an Produktions-Manager übergeben
+        produktionsManager.bestellungEingegangen(b);
+        System.out.println("Bestellung #" + b.gibBestellungsNr() + " an Produktions_Manager übergeben.");
         return b;
     }
 

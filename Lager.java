@@ -206,6 +206,71 @@ public class Lager {
         Lieferant lieferant = new Lieferant();
         lagerAuffuellen(lieferant);
     }
+
+    /**
+     * Produktionsverbrauch: Zieht Material bei Produktionsstart einer Bestellung ab
+     * und triggert bei Engpässen eine Nachbestellung (asynchron über Lieferant).
+     * Verbrauchsregeln pro Produkt:
+     *  - Standardtuer: Holz 2, Schrauben 10, Farbe 2, Karton 1
+     *  - Premiumtuer:  Holz 4, Schrauben 5,  Glas 5,  Farbe 1, Karton 5
+     */
+    public synchronized void verbraucheMaterialFuer(Bestellung bestellung) {
+        List<Produkt> produkte = bestellung.gibProdukte();
+
+        int bedarfHolz = 0;
+        int bedarfSchrauben = 0;
+        int bedarfFarbe = 0;
+        int bedarfKarton = 0;
+        int bedarfGlas = 0;
+
+        for (int i = 0; i < produkte.size(); i++) {
+            Produkt p = produkte.get(i);
+            if (p instanceof Standardtuer) {
+                bedarfHolz += 2;
+                bedarfSchrauben += 10;
+                bedarfFarbe += 2;
+                bedarfKarton += 1;
+            } else if (p instanceof Premiumtuer) {
+                bedarfHolz += 4;
+                bedarfSchrauben += 5;
+                bedarfFarbe += 1;
+                bedarfKarton += 5;
+                bedarfGlas += 5;
+            }
+        }
+
+        int holzVorher = holz;
+        int schraubenVorher = schrauben;
+        int farbeVorher = farbe;
+        int kartonVorher = karton;
+        int glasVorher = glas;
+
+        // Tatsächlich abziehbare Mengen (nicht unter 0)
+        int abzugHolz = Math.min(holz, bedarfHolz);
+        int abzugSchrauben = Math.min(schrauben, bedarfSchrauben);
+        int abzugFarbe = Math.min(farbe, bedarfFarbe);
+        int abzugKarton = Math.min(karton, bedarfKarton);
+        int abzugGlas = Math.min(glas, bedarfGlas);
+
+        holz -= abzugHolz;
+        schrauben -= abzugSchrauben;
+        farbe -= abzugFarbe;
+        karton -= abzugKarton;
+        glas -= abzugGlas;
+
+        System.out.println("[Lager] Verbrauch für Bestellung #" + bestellung.gibBestellungsNr()
+                + ": Holz-" + abzugHolz + ", Schrauben-" + abzugSchrauben
+                + ", Farbe-" + abzugFarbe + ", Karton-" + abzugKarton
+                + ", Glas-" + abzugGlas + ".");
+
+        boolean mangel = (bedarfHolz > holzVorher) || (bedarfSchrauben > schraubenVorher)
+                       || (bedarfFarbe > farbeVorher) || (bedarfKarton > kartonVorher)
+                       || (bedarfGlas > glasVorher);
+        if (mangel) {
+            System.out.println("[Lager] Material unzureichend – Lieferant wird nachbestellen.");
+            lagerAuffuellenOhneParameter();
+        }
+    }
     public int gibHolz() {
         return holz;
     }

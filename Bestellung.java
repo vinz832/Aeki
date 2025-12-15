@@ -30,6 +30,10 @@ public class Bestellung {
 
     private boolean bestellBestaetigung;
     
+    // Produktionsstatus der Bestellung (für Produktions_Manager)
+    private boolean inProduktion;
+    private boolean abgeschlossen;
+    
     //Beschaffungszeit in Tage, wird im konstruktor automatisch berechnetm kann aber angepasst werden
     private int beschaffungsZeit;
     private int lieferZeit;
@@ -54,6 +58,8 @@ public class Bestellung {
         this.anzahlStandardTueren = 0;
         this.anzahlPremiumTueren = 0;
         this.fabrikReferenz = null;
+        this.inProduktion = false;
+        this.abgeschlossen = false;
     }
 
     /**
@@ -88,6 +94,8 @@ public class Bestellung {
     public Bestellung(int bestellungsNr, int anzahlStandardTueren, int anzahlPremiumTueren, Fabrik fabrik) {
         this.bestellteProdukte = new ArrayList<>();
         this.fabrikReferenz = fabrik;
+        this.inProduktion = false;
+        this.abgeschlossen = false;
 
         if (bestellungsNr <= 0) {
             System.out.println("Fehler: bestellungsNr muss > 0 sein.");
@@ -117,6 +125,42 @@ public class Bestellung {
         // (z. B. bestellungBestaetigen() oder zeigeBeschaffungsZeit()).
         this.beschaffungsZeit = 0;
         this.lieferZeit = 0;
+    }
+
+    /**
+     * Gibt die Liste der bestellten Produkte zurück.
+     * Alias für gibProdukte() zur Verwendung im Produktions_Manager.
+     */
+    public List<Produkt> gibBestellteProdukte() {
+        return bestellteProdukte;
+    }
+
+    /**
+     * Markiert, ob die Bestellung aktuell in Produktion ist.
+     */
+    public void setzeInProduktion(boolean wert) {
+        this.inProduktion = wert;
+    }
+
+    /**
+     * Liefert true, wenn die Bestellung in Produktion ist.
+     */
+    public boolean gibInProduktion() {
+        return inProduktion;
+    }
+
+    /**
+     * Markiert die Bestellung als abgeschlossen (Produktion fertiggestellt).
+     */
+    public void setzeAbgeschlossen(boolean wert) {
+        this.abgeschlossen = wert;
+    }
+
+    /**
+     * Liefert true, wenn die Bestellung abgeschlossen ist.
+     */
+    public boolean gibAbgeschlossen() {
+        return abgeschlossen;
     }
 
     /**
