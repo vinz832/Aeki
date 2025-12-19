@@ -7,6 +7,9 @@ import java.util.Set;
  * Tests für den Produktions_Manager Thread-Verhalten, Handover und Abschlussmeldung.
  */
 public class ProduktionsManagerTest extends TestCase {
+    // Sichtbarer Bezug für BlueJ-Diagramm: explizites Feld auf Produktions_Manager
+    // (nicht zwingend genutzt, dient der visuellen Verknüpfung)
+    private Produktions_Manager pmRef;
 
     public void testPMIstThreadUndGestartet() throws Exception {
         Fabrik f = new Fabrik();
@@ -83,6 +86,49 @@ public class ProduktionsManagerTest extends TestCase {
             assertFalse(b.gibInProduktion());
         } finally {
             System.setOut(original);
+            if (vorher != null) System.setProperty("aeki.time.scale", vorher); else System.clearProperty("aeki.time.scale");
+        }
+    }
+
+    /**
+     * Integrierter Run-Loop-Test: prüft Übernahme und Produktionsstart.
+     */
+    public void testRunLoopUebernimmtUndStartetProduktion() throws Exception {
+        String vorher = System.getProperty("aeki.time.scale");
+        System.setProperty("aeki.time.scale", "0.001");
+
+        Produktions_Manager pm = new Produktions_Manager();
+        pm.start();
+        try {
+            Bestellung b = new Bestellung(9999, 1, 0);
+            pm.neueBestellungHinzufuegen(b);
+
+            long deadline = System.currentTimeMillis() + 2_000L;
+            boolean moved = false;
+            while (System.currentTimeMillis() < deadline) {
+                if (pm.debugInProduktionSize() == 1 && pm.debugZuVerarbeitenSize() == 0) {
+                    moved = true;
+                    break;
+                }
+                Thread.sleep(50L);
+            }
+            assertTrue("Bestellung wurde nicht in 'inProduktion' verschoben", moved);
+
+            assertTrue("Bestellung nicht als in Produktion markiert", b.gibInProduktion());
+
+            boolean started = false;
+            deadline = System.currentTimeMillis() + 2_000L;
+            while (System.currentTimeMillis() < deadline) {
+                if (!b.gibProdukte().isEmpty() && b.gibProdukte().get(0).aktuellerZustand() >= 1) {
+                    started = true;
+                    break;
+                }
+                Thread.sleep(50L);
+            }
+            assertTrue("Produktion nicht gestartet (Produktzustand < IN_PRODUKTION)", started);
+        } finally {
+            pm.stoppe();
+            pm.join(500L);
             if (vorher != null) System.setProperty("aeki.time.scale", vorher); else System.clearProperty("aeki.time.scale");
         }
     }
