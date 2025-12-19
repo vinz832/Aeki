@@ -60,6 +60,8 @@ public abstract class Produkt {
     }
     /**
      * Fügt eine Produktionsstation (Roboter) zur Bearbeitungsliste hinzu.
+     *
+     * @param roboter Roboter/Station, die dieses Produkt bearbeiten soll
      */
     public void produktionsStationHinzufuegen(Roboter roboter) {
         if (roboter == null) {

@@ -64,7 +64,7 @@ public class Bestellung {
 
     /**
      * Setzt die Fabrik für diese Anzeige-Instanz.
-     * @param fabrik die Fabrik, deren Bestellungen angezeigt werden sollen
+        * @param fabrik die Fabrik, deren Bestellungen angezeigt werden sollen
      */
     public void setztFabrik(Fabrik fabrik) {
         if (fabrik == null) {
@@ -137,6 +137,8 @@ public class Bestellung {
 
     /**
      * Markiert, ob die Bestellung aktuell in Produktion ist.
+     *
+     * @param wert true, wenn in Produktion; sonst false
      */
     public void setzeInProduktion(boolean wert) {
         this.inProduktion = wert;
@@ -151,6 +153,8 @@ public class Bestellung {
 
     /**
      * Markiert die Bestellung als abgeschlossen (Produktion fertiggestellt).
+     *
+     * @param wert true, wenn abgeschlossen; sonst false
      */
     public void setzeAbgeschlossen(boolean wert) {
         this.abgeschlossen = wert;

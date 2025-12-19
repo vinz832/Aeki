@@ -33,6 +33,13 @@ public class Lieferant extends Thread {
 
     /**
      * Konstruktor für eine konkrete, verzögerte Lieferung an ein Lager.
+     *
+     * @param lager Ziel-Lager, das aufgefüllt werden soll
+     * @param holz zu liefernde Holzeinheiten
+     * @param schrauben zu liefernde Schrauben
+     * @param farbe zu liefernde Farbeinheiten
+     * @param karton zu liefernde Kartoneinheiten
+     * @param glas zu liefernde Glaseinheiten
      */
     public Lieferant(Lager lager, int holz, int schrauben, int farbe, int karton, int glas) {
         this.zielLager = lager;
@@ -46,6 +53,13 @@ public class Lieferant extends Thread {
     /**
      * Factory-Methode im bisherigen API-Stil: Startet eine asynchrone Lieferung.
      * Es wird intern eine neue Thread-Instanz erstellt und gestartet.
+     *
+     * @param lager Ziel-Lager, das aufgefüllt werden soll
+     * @param holz zu liefernde Holzeinheiten
+     * @param schrauben zu liefernde Schrauben
+     * @param farbe zu liefernde Farbeinheiten
+     * @param karton zu liefernde Kartoneinheiten
+     * @param glas zu liefernde Glaseinheiten
      */
     public void bestellungAufgebenFuerMaterial(Lager lager,
                                                int holz,

@@ -48,6 +48,11 @@ public class Holzbearbeitungs_Roboter extends Roboter {
         return (long) v;
     }
 
+    /**
+     * Produziert ein Produkt an der Holzbearbeitungsstation.
+     *
+     * @param p zu bearbeitendes Produkt (Standardtuer oder Premiumtuer)
+     */
     @Override
     protected void produziereProdukt(Produkt p) {
         if (p == null) return;

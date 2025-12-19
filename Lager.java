@@ -70,6 +70,7 @@ public class Lager {
      * Ermittelt die Beschaffungszeit für eine Bestellung basierend auf aktuellen Beständen.
      * Optional: reserviert Material aus dem Lager.
      * @return 0 wenn genug Material vorhanden, sonst 2
+        * @param bestellung Bestellung, deren Materialbedarf geprüft und ggf. reserviert wird
      */
     public synchronized int gibBeschaffungsZeit(Bestellung bestellung) {
         List<Produkt> produkte = bestellung.gibProdukte();
@@ -118,6 +119,7 @@ public class Lager {
     /**
      * Prüft die Beschaffungszeit, ohne Material zu reservieren.
      * @return 0 wenn genug Material vorhanden, sonst 2
+        * @param bestellung Bestellung, deren Materialbedarf geprüft wird (ohne Reservierung)
      */
     public synchronized int pruefeBeschaffungsZeitOhneReservierung(Bestellung bestellung) {
         List<Produkt> produkte = bestellung.gibProdukte();
@@ -155,6 +157,8 @@ public class Lager {
 
     /**
      * Füllt das Lager durch Bestellung beim Lieferanten wieder auf.
+        *
+        * @param lieferant Lieferant, der die Auffüllung asynchron ausführt
      */
     public synchronized void lagerAuffuellen(Lieferant lieferant) {
         lieferant.bestellungAufgebenFuerMaterial(this,
@@ -213,6 +217,8 @@ public class Lager {
      * Verbrauchsregeln pro Produkt:
      *  - Standardtuer: Holz 2, Schrauben 10, Farbe 2, Karton 1
      *  - Premiumtuer:  Holz 4, Schrauben 5,  Glas 5,  Farbe 1, Karton 5
+        *
+        * @param bestellung Bestellung, deren Produktionsbedarf geprüft wird
      */
     public synchronized void verbraucheMaterialFuer(Bestellung bestellung) {
         List<Produkt> produkte = bestellung.gibProdukte();

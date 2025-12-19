@@ -62,6 +62,10 @@ public class Fabrik {
      * BlueJ-Helfer: Erstellt eine Bestellung mit den angegebenen Mengen und
      * prüft direkt die Beschaffungszeit im gemeinsamen Lager. Gibt den Wert zurück.
      * Hinweis: Dabei wird Material reserviert, falls genug vorhanden ist.
+     *
+     * @param standardTueren Anzahl Standardtüren
+     * @param premiumTueren  Anzahl Premiumtüren
+     * @return 0 bei genügend Material, sonst 2
      */
     public int pruefeBeschaffungsZeitFuer(int standardTueren, int premiumTueren) {
         Bestellung b = bestellungAufgeben(standardTueren, premiumTueren);
@@ -74,6 +78,8 @@ public class Fabrik {
     /**
      * Reserviert Material im globalen Lager und setzt Beschaffungszeit/Lieferzeit.
      * Wird beim Bestaetigen der Bestellung aufgerufen.
+     *
+     * @param b Bestellung, für die Material reserviert und Zeiten gesetzt werden
      */
     public void reserveMaterialFuer(Bestellung b) {
         int beschaffungsZeit = lager.gibBeschaffungsZeit(b);

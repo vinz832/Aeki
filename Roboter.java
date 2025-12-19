@@ -10,6 +10,8 @@ public class Roboter extends Thread {
 
     /**
      * Fügt ein Produkt der Warteschlange hinzu.
+     *
+     * @param p Produkt, das in die Roboter-Queue aufgenommen wird
      */
     public void fuegeProduktHinzu(Produkt p) {
         if (p == null) {
@@ -72,6 +74,8 @@ public class Roboter extends Thread {
 
     /**
      * Produktions-Hook für Unterklassen. Basisklasse führt keine echte Arbeit aus.
+     *
+     * @param p Produkt, das produziert werden soll
      */
     protected void produziereProdukt(Produkt p) {
         // Basis-Implementierung: kein Sleep, nur Zustand loggen

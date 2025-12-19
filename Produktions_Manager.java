@@ -22,6 +22,8 @@ public class Produktions_Manager extends Thread {
 
     /**
      * Fügt eine neue Bestellung der Warteschlange hinzu.
+        *
+        * @param b Bestellung, die in die Verarbeitung aufgenommen wird
      */
     public void bestellungEingegangen(Bestellung b) {
         if (b == null) return;
@@ -43,6 +45,8 @@ public class Produktions_Manager extends Thread {
 
     /**
      * Platzhalter für Schritt 6: Startet die Produktion einer Bestellung.
+        *
+        * @param b Bestellung, deren Produkte in die Produktion gehen
      */
     protected void starteProduktion(Bestellung b) {
         if (b == null) return;
