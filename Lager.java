@@ -239,36 +239,17 @@ public class Lager {
             }
         }
 
-        int holzVorher = holz;
-        int schraubenVorher = schrauben;
-        int farbeVorher = farbe;
-        int kartonVorher = karton;
-        int glasVorher = glas;
-
-        // Tatsächlich abziehbare Mengen (nicht unter 0)
-        int abzugHolz = Math.min(holz, bedarfHolz);
-        int abzugSchrauben = Math.min(schrauben, bedarfSchrauben);
-        int abzugFarbe = Math.min(farbe, bedarfFarbe);
-        int abzugKarton = Math.min(karton, bedarfKarton);
-        int abzugGlas = Math.min(glas, bedarfGlas);
-
-        holz -= abzugHolz;
-        schrauben -= abzugSchrauben;
-        farbe -= abzugFarbe;
-        karton -= abzugKarton;
-        glas -= abzugGlas;
-
-        System.out.println("[Lager] Verbrauch für Bestellung #" + bestellung.gibBestellungsNr()
-                + ": Holz-" + abzugHolz + ", Schrauben-" + abzugSchrauben
-                + ", Farbe-" + abzugFarbe + ", Karton-" + abzugKarton
-                + ", Glas-" + abzugGlas + ".");
-
-        boolean mangel = (bedarfHolz > holzVorher) || (bedarfSchrauben > schraubenVorher)
-                       || (bedarfFarbe > farbeVorher) || (bedarfKarton > kartonVorher)
-                       || (bedarfGlas > glasVorher);
+        // Keine doppelte Bestandsveränderung mehr: Reservierung erfolgt bereits über
+        // gibBeschaffungsZeit(...). Hier prüfen wir nur, ob grundsätzlich genug
+        // Material vorhanden wäre; falls nicht, stoßen wir eine Nachbestellung an.
+        boolean mangel = (bedarfHolz > holz) || (bedarfSchrauben > schrauben)
+                       || (bedarfFarbe > farbe) || (bedarfKarton > karton)
+                       || (bedarfGlas > glas);
         if (mangel) {
             System.out.println("[Lager] Material unzureichend – Lieferant wird nachbestellen.");
             lagerAuffuellenOhneParameter();
+        } else {
+            System.out.println("[Lager] Produktion startet – Material wurde bereits reserviert.");
         }
     }
     public int gibHolz() {
