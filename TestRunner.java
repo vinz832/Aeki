@@ -8,10 +8,11 @@ import org.junit.runner.notification.Failure;
  */
 public class TestRunner {
     public static void main(String[] args) {
-        System.out.println("Starte JUnit-Tests: FabrikTest, ProduktionsManagerTest, HolzbearbeitungsRoboterTest, LagerVerbrauchNachbestellungTest, BestellungNegativSetterTest, RoboterQueueConsumptionTest");
+        System.out.println("Starte JUnit-Tests: FabrikTest, ProduktionsManagerTest, ProduktionsManagerRunLoopTest, HolzbearbeitungsRoboterTest, LagerVerbrauchNachbestellungTest, BestellungNegativSetterTest, RoboterQueueConsumptionTest");
         Result result = JUnitCore.runClasses(
             FabrikTest.class,
             ProduktionsManagerTest.class,
+            ProduktionsManagerRunLoopTest.class,
             HolzbearbeitungsRoboterTest.class,
             LagerVerbrauchNachbestellungTest.class,
             BestellungNegativSetterTest.class,

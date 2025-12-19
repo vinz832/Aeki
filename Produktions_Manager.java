@@ -43,6 +43,9 @@ public class Produktions_Manager extends Thread {
         holzRoboter.stopRoboter();
     }
 
+    // Alias gemäss Testvorgaben: sauberer Stop-Mechanismus per "stoppe()"
+    public void stoppe() { stopManager(); }
+
     /**
      * Platzhalter für Schritt 6: Startet die Produktion einer Bestellung.
         *
@@ -135,4 +138,11 @@ public class Produktions_Manager extends Thread {
     public int gibAnzahlInProduktion() {
         synchronized (inProduktion) { return inProduktion.size(); }
     }
+
+    // Minimal-invasive Debug-APIs für Tests (Aliases, ohne Design zu verändern)
+    public int debugZuVerarbeitenSize() { return gibAnzahlZuVerarbeiten(); }
+    public int debugInProduktionSize() { return gibAnzahlInProduktion(); }
+
+    // Alias für das Hinzufügen neuer Bestellungen (benennungsfreundlich für Tests)
+    public void neueBestellungHinzufuegen(Bestellung b) { bestellungEingegangen(b); }
 }
