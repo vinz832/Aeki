@@ -1,3 +1,14 @@
+/**
+ 
+ * * Testet, dass bei Produktionsstart mit Materialmangel eine Nachbestellung ausgelöst wird.
+
+ * @author Owen, Matthieu, Alexander, Moacir, Vinzenz
+ * @version 19.12.2025
+ */
+
+
+
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -5,7 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 /**
- * Testet, dass bei Produktionsstart mit Materialmangel eine Nachbestellung ausgelöst wird.
+ 
  * Es wird NUR der Log-Hinweis geprüft, nicht die spätere Anlieferung (die 48s dauern kann).
  */
 public class LagerVerbrauchNachbestellungTest {

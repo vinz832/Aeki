@@ -1,3 +1,14 @@
+/**
+ 
+ * * Testet, ob die Berechnung der Lieferzeit korrekt funktioniert
+
+ * @author Owen, Matthieu, Alexander, Moacir, Vinzenz
+ * @version 19.12.2025
+ */
+
+
+
+
 import junit.framework.TestCase;
 
 public class LieferzeitTest extends TestCase {

@@ -1,8 +1,14 @@
+
+
+
 import java.util.LinkedList;
 
 /**
  * Produktions-Manager: Verteilt Bestellungen an Roboter und überwacht den Fortschritt.
  * Hält zwei Listen: zu verarbeiten und in Produktion.
+ * 
+ *  @author Owen, Mathieu, Alexander, Moacir, Vinzenz
+ * @version 8.12.2025
  */
 public class Produktions_Manager extends Thread {
     private final LinkedList<Bestellung> zuVerarbeiten = new LinkedList<Bestellung>();

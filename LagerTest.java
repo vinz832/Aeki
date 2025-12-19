@@ -1,3 +1,11 @@
+/**
+ 
+ * * Tests für die Funktionen des Lagers (Auffüllen)
+
+ * @author Owen, Matthieu, Alexander, Moacir, Vinzenz
+ * @version 19.12.2025
+ * */
+
 import junit.framework.TestCase;
 
 public class LagerTest extends TestCase {
